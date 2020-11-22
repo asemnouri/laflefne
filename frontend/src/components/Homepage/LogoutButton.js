@@ -32,7 +32,7 @@ export const Button = ({
                         success: (res) => {
                             window.location.href = "/"
                             localStorage.removeItem("user-id")
-                        },
+                        }, 
                         error: (err) => {
                             console.log(err)
                         }
