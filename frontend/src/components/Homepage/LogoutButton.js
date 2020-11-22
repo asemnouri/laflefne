@@ -27,7 +27,7 @@ export const Button = ({
                 //destroy the token 
                 onClick={() => {
                     $.ajax({
-                        method: 'POST',
+                        method: 'POST', 
                         url: '/logout',
                         success: (res) => {
                             window.location.href = "/"
