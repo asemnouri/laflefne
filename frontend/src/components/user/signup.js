@@ -60,6 +60,7 @@ class Signup extends Component {
                     success: function (res) {
                         console.log("it's working")
                         window.location.href = "/"
+                        localStorage.setItem("user-id",res.userId)
                     },
                     error: function (error) {
                         if (error.status === 451) {

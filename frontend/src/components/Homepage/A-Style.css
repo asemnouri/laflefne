@@ -403,7 +403,7 @@ video {
       justify-content: center;
       align-items: center;
       height: 80px;
-      max-width: 1500px;
+      max-width: 1400px;
     }
     
     .navbar-logo {
@@ -433,7 +433,7 @@ video {
       grid-gap: 10px;
       list-style: none;
       text-align: center;
-      width: 60vw;
+      width: 65vw;
       justify-content: end;
       margin-right: 2rem;
     }
@@ -579,6 +579,7 @@ video {
     padding: 8px 20px;
     border: 1px solid var(--primary);
     transition: all 0.3s ease-out;
+    margin-right: 10px;
   }
   
   .btn--medium {

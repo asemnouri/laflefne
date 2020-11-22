@@ -4,7 +4,8 @@ dotenv.config()
 //for mongo db 
 const mongoose = require('mongoose');
 //(check .env file!)
-mongoose.connect(process.env.DB_CONNECT, { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true })
+const dbURI = 'mongodb+srv://asemOne:asem1234@cluster0.xqniz.mongodb.net/laffeh?retryWrites=true&w=majority'
+mongoose.connect(dbURI, { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true })
 var db = mongoose.connection
 //to check if there is a connection with db or not 
 db.on('error', console.error.bind(console, 'connection error'))

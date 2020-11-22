@@ -25,8 +25,9 @@ class Login extends React.Component {
       success: (res) => {
         //will send to homepage
         console.log(this.props)
-        this.props.toggleuser()
+        // this.props.toggleuser()
         window.location.href = "/"
+        localStorage.setItem("user-id",res.userId)
       },
       error: function (error) {
         if (error.status === 410) {

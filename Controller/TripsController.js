@@ -14,7 +14,7 @@ exports.tripsList = (req, res) => {
     });
 }
 
-
+ 
 //to add tourist(user) id to idOfTourist array in trips collection.
 exports.updateTrip = (req, res) => {
     trips.findOne({ _id: req.body.id }, (err, trip) => {
