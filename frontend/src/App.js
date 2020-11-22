@@ -24,7 +24,7 @@ class App extends React.Component {
       isuser: false,
       tokenin: "",
       testtrips: [],
-      userid: ''
+      userid:  ""
     }
     this.changeLogInStatus = this.changeLogInStatus.bind(this)
     this.getTrips = this.getTrips.bind(this)
@@ -81,10 +81,11 @@ class App extends React.Component {
           data: { id: res._id },
           success: (resin) => {
             console.log(resin._id)
-            // this.setState({
-            //   userid: resin
-            // })  
-            localStorage.setItem("user-id",resin._id)  
+
+            this.setState({
+              userid: resin
+            })  
+            // localStorage.setItem("user-id",resin._id)  
           },
           error: (err) => {
             console.log(err)
