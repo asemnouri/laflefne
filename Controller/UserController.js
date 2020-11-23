@@ -13,6 +13,7 @@ exports.signUpUser = async (req, res) => {
     // User Data when Signing up
     userMail = req.body.userMail
     userpas = req.body.userPass
+    console.log(req.body)
     if (!req.body.userfirstName) {
         return res.status(451).send('error')
     }
@@ -107,4 +108,20 @@ exports.getuserinfo = (req, res) => {
             return res.status(200).send(userData)
         }
     })
+}
+
+
+//remove user
+exports.removeUser = (req, res) => {
+    //can put email 
+    UserModel.findOneAndRemove({ _id: req.body._id })
+        .then((data) => {
+            console.log('REMOVED:')
+            console.log(data)
+            res.status(200).send('Removed')
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(400).send('Err in removing')
+        })
 }
