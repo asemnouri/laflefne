@@ -30,14 +30,9 @@ let tripsSchema = mongoose.Schema({
     discription: {
         type: Object
     },
-    roomId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'RoomChat',
-        required: true
-    }
+    chatData: []
 })
 let userSchema = mongoose.Schema({
-    // id: { type: Number, unique: true, sparse: true },
     userName: String,
     userMail: String,
     userPass: String,
@@ -48,24 +43,9 @@ let userSchema = mongoose.Schema({
     admin: Boolean
 })
 
-let paymentSchema = mongoose.Schema({
-    // id: { type: Number, unique: true },
-    creditCard: Number,
-    cvv: Number,
-    exDate: Date
-})
 
-let roomChatSchema = mongoose.Schema({
-    // tripId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'trips',
-    //     required: true
-    // },                
-    msgsBody: [{ //can have an id represented by the obj index in the array, so no need 
-        body: String,
-        username: String
-    }],
-})
+
+
 let RoomChat = mongoose.model("RoomChat", roomChatSchema);
 let trips = mongoose.model("tripsinfo", tripsSchema);
 let users = mongoose.model("userinfo", userSchema);
