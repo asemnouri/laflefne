@@ -76,7 +76,6 @@ class Login extends React.Component {
               <div style={{ "marginTop": '12px' }}>
                 <small id="logPass"></small>
                 <input type='button' value='Signin' onClick={this.LoginHandler} className="btn btn-secondary" style={{ "display": 'inline-block', "marginRight": '10px' }}></input>
-                <small id="LoginupSwitch" className="form-text text-muted" style={{ "display": 'inline-block' }} onClick={this.props.toggleLogin}>Do not have an account</small>
               </div>
             </form>
           </div>

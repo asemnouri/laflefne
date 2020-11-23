@@ -24,7 +24,7 @@ class App extends React.Component {
       isuser: false,
       tokenin: "",
       testtrips: [],
-      userid:  ""
+      userid: ""
     }
     this.changeLogInStatus = this.changeLogInStatus.bind(this)
     this.getTrips = this.getTrips.bind(this)
@@ -84,7 +84,7 @@ class App extends React.Component {
 
             this.setState({
               userid: resin
-            })  
+            })
             // localStorage.setItem("user-id",resin._id)  
           },
           error: (err) => {
@@ -115,6 +115,7 @@ class App extends React.Component {
       />
     }
     // if there is token - display navbar2 (login in navbar)
+    // console.log(document.cookie)
     if (this.state.tokenin !== `authToken=` && this.state.tokenin !== '') {
       nav = <Navbar2></Navbar2>
     }

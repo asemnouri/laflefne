@@ -42,7 +42,7 @@ class Signup extends Component {
         console.log(this.state.file)
         if (!validateEmail(this.state.email)) {
             document.getElementById("matchPass").innerHTML = "<div class='alert alert-danger' role='alert'>Wrong Email</div>"
-        }
+        } 
         else
             if (this.state.password === this.state.conformPassword) {
                 var username = this.state.firstName + " " + this.state.lastName
@@ -138,7 +138,6 @@ class Signup extends Component {
                             <div>
                                 <small id="matchPass"></small>
                                 <input type='button' value='Sign Up!' onClick={this.LoginHandler} className="btn btn-secondary" style={{ "display": 'inline-block', "marginRight": '4px' }}></input>
-                                <small id="LoginupSwitch" className="form-text text-muted" style={{ "display": 'inline-block' }} onClick={this.props.toggleLogin}>Have an account? Login Here.</small>
                             </div>
                         </form>
                     </div>
