@@ -24,11 +24,11 @@ class App extends React.Component {
       isuser: false,
       tokenin: "",
       testtrips: [],
-      userid: ''
+      userid: ""
     }
     this.changeLogInStatus = this.changeLogInStatus.bind(this)
     this.getTrips = this.getTrips.bind(this)
-    this.changeUserStatus = this.changeUserStatus.bind(this)
+    // this.changeUserStatus = this.changeUserStatus.bind(this)
   }
   //user want to sign up or sign in (State change)
   changeLogInStatus() {
@@ -37,7 +37,7 @@ class App extends React.Component {
     })
   }
   //user is login or not (State change)
-  changeUserStatus() {
+  changeUserStatus = () => {
     this.setState({
       isuser: !this.state.isuser,
 
@@ -81,9 +81,11 @@ class App extends React.Component {
           data: { id: res._id },
           success: (resin) => {
             console.log(resin._id)
+
             this.setState({
               userid: resin
             })
+            // localStorage.setItem("user-id",resin._id)  
           },
           error: (err) => {
             console.log(err)
@@ -106,18 +108,19 @@ class App extends React.Component {
       />
     }
     else {
-          //to check if the user want to login will be directed to login form 
+      //to check if the user want to login will be directed to login form 
       comp = <Route
-        path='/sign-up'
-        render={(props) => <Login toggleuser={this.changeUserStatus} toggleLogin={this.changeLogInStatus}/>}
+        path='/sign-in'
+        render={(props) => <Login toggleuser={this.changeUserStatus} toggleLogin={this.changeLogInStatus} />}
       />
     }
-    //if there is token - display navbar2 (login in navbar)
+    // if there is token - display navbar2 (login in navbar)
+    // console.log(document.cookie)
     if (this.state.tokenin !== `authToken=` && this.state.tokenin !== '') {
       nav = <Navbar2></Navbar2>
     }
     else {
-     //display original navbar 
+      //display original navbar 
       nav = <Navbar></Navbar>
     }
     return (
@@ -128,13 +131,14 @@ class App extends React.Component {
             {comp}
             <Route
               path="/"
-              exact render={(props) => <Home userid={this.state.userid} testtrips={this.state.testtrips}  trip={this.state.thetrip} />}
+              exact render={(props) => <Home userid={this.state.userid} testtrips={this.state.testtrips} trip={this.state.thetrip} />}
             />
             <Route
               path="/trips"
-              render={(props) => <Trips userid={this.state.userid} testtrips={this.state.testtrips}   trip={this.state.thetrip} />}
+              render={(props) => <Trips userid={this.state.userid} testtrips={this.state.testtrips} trip={this.state.thetrip} />}
             />
             <Route path="/sign-up" exact component={Signup} />
+            <Route path="/sign-in" exact component={Login} />
             <Route path="/user" exact render={(props) => <Profile userid={this.state.userid} />}
             />
             <Route path="/trip" exact component={Trip} />

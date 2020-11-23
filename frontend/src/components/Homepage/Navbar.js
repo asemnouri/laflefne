@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import './A-Style.css';
 import { Button } from './Button';
-
+import { ButtonSignIn } from "./ButtonSignIn"
 function Navbar() {
     //responsive nav bar functionality
     const [click, setClick] = useState(false);
@@ -48,8 +48,15 @@ function Navbar() {
                                 className='nav-links-mobile'
                                 onClick={closeMobileMenu}>Sign Up</Link>
                         </li>
+                        <li>
+                            <Link
+                                to='/sign-in'
+                                className='nav-links-mobile'
+                                onClick={closeMobileMenu}>Sign In</Link>
+                        </li>
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+                    {button && <Button buttonStyle='btn--outline' >SIGN UP</Button>}
+                    {button && <Link to="/sign-in"><ButtonSignIn buttonStyle='btn--outline'>SIGN IN</ButtonSignIn></Link>}
                 </div>
             </nav>
         </>
