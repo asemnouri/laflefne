@@ -9,6 +9,7 @@ const tripsData = require('../Data/trips.json')
 
 //to get all trip information from data base
 exports.tripsList = (req, res) => {
+
     trips.find({}, (err, trips) => {
         if (err)
             res.send(err);
@@ -48,7 +49,7 @@ exports.updateTrip = (req, res) => {
             )
         }
     })
-}
+} 
 
 //to fill trips db from json file (request recived from postman)
 exports.fillTrips = (req, res) => {
@@ -60,7 +61,7 @@ exports.fillTrips = (req, res) => {
             console.log(trip1)
         })
     }
-    res.send(tripsData)
+    res.send(tripsData) 
 }
 
 //get trip by it's id

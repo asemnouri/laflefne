@@ -4,7 +4,7 @@ import Footer from './components/Homepage/Footer';
 import Home from './components/Homepage/Home'
 import $ from 'jquery'
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import './App.css';
 import Trips from './components/Homepage/Cards'
 import Login from './components/user/login'
@@ -24,7 +24,9 @@ class App extends React.Component {
       isuser: false,
       tokenin: "",
       testtrips: [],
-      userid: ""
+      userid: "",
+      admin:false,
+      realUserId:""
     }
     this.changeLogInStatus = this.changeLogInStatus.bind(this)
     this.getTrips = this.getTrips.bind(this)
@@ -48,7 +50,7 @@ class App extends React.Component {
     var alltrips = []
     $.ajax({
       type: "GET",
-      url: "/gettrips",
+      url: "/gettrips", 
       success: (res) => {
         for (var i in res) {
           alltrips.push(res[i])
@@ -139,7 +141,12 @@ class App extends React.Component {
             />
             <Route path="/sign-up" exact component={Signup} />
             <Route path="/sign-in" exact component={Login} />
-            <Route path="/user" exact render={(props) => <Profile userid={this.state.userid} />}
+            <Route path="/user" exact render={(props) => 
+            !this.state.islogin?
+            <Redirect to="/"/>
+            :
+            <Profile userid={this.state.userid} />
+            }
             />
             <Route path="/trip" exact component={Trip} />
             <Route path="/mytrip" exact component={MyTrip} />
@@ -152,7 +159,7 @@ class App extends React.Component {
         </Router>
       </>
     )
-  }
+  } 
 }
 
 export default App;

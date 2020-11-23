@@ -38,7 +38,8 @@ exports.signUpUser = async (req, res) => {
             newuser.userPass = hashedPass
             newuser.userNum = req.body.userNum
             newuser.trips = []
-            newuser.newsLetter = req.body.newsLetter
+            newuser.newsLetter = req.body.newsLetter,
+            newuser.admin=false
             newuser.save((err, saveduse) => {
                 if (err) {
                     console.log(err)
@@ -51,7 +52,7 @@ exports.signUpUser = async (req, res) => {
         }
         else
             return res.status(406).send('user existed')
-    })
+    }) 
 }
 
 //loging in 
