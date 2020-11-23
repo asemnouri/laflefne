@@ -17,7 +17,7 @@ exports.tripsList = (req, res) => {
     });
 }
 
- 
+
 //to add tourist(user) id to idOfTourist array in trips collection.
 exports.updateTrip = (req, res) => {
     trips.findOne({ _id: req.body.id }, (err, trip) => {   //1 SO here get the trip
@@ -49,7 +49,7 @@ exports.updateTrip = (req, res) => {
             )
         }
     })
-} 
+}
 
 //to fill trips db from json file (request recived from postman)
 exports.fillTrips = (req, res) => {
@@ -61,7 +61,7 @@ exports.fillTrips = (req, res) => {
             console.log(trip1)
         })
     }
-    res.send(tripsData) 
+    res.send(tripsData)
 }
 
 //get trip by it's id
@@ -80,41 +80,26 @@ exports.addTrip = (req, res) => {
     console.log('Here creating trip******************************************************')
     //must create chat room for the trip before saving to db
     var trip;
-    var chatR = new chatRoom({
-        msgsBody: [{}],
+    trip = new trips({
+        image: req.body.data.image, //array
+        tripType: req.body.data.tripType,
+        name: req.body.data.name,
+        explore: req.body.data.explore,
+        price: req.body.data.price,
+        date: req.body.data.date,
+        deadLine: req.body.data.deadLine,
+        tripGuide: req.body.data.tripGuide,
+        maximumNumPerTrip: req.body.data.maximumNumPerTrip,
+        idOfTourist: req.body.data.idOfTourist, //array
+        discription: req.body.data.discription
     })
-    chatR.save()
-        .then((room) => {
-            console.log('RoomChat created')
-            trip = new trips({
-                image: req.body.data.image, //array
-                tripType: req.body.data.tripType,
-                name: req.body.data.name,
-                explore: req.body.data.explore,
-                price: req.body.data.price,
-                date: req.body.data.date,
-                deadLine: req.body.data.deadLine,
-                tripGuide: req.body.data.tripGuide,
-                maximumNumPerTrip: req.body.data.maximumNumPerTrip,
-                idOfTourist: req.body.data.idOfTourist, //array
-                discription: req.body.data.discription,
-                roomId: room._id
-            })
-            trip.save().then((trip) => {
-                console.log("trip saved")
-                res.status(200).json(trip)
-            })
-                .catch((err) => {
-                    console.log(err)
-                    console.log('Trip not saved')
-                    res.status(404).send("Trip not saved")
-                })
-
-        })
+    trip.save().then((trip) => {
+        console.log("trip saved")
+        res.status(200).json(trip)
+    })
         .catch((err) => {
             console.log(err)
-            console.log('room not saved')
-            res.status(404).send('No room created- no trip saved')
+            console.log('Trip not saved')
+            res.status(404).send("Trip not saved")
         })
-
 }

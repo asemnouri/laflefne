@@ -48,7 +48,7 @@ export default function ScrollDialog() {
                         tabIndex={-1}
                     >
                         <div style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
-                            <Avatar sizes="small" style={{marginRight:"5px"}}>H</Avatar>
+                            <Avatar sizes="small" style={{ marginRight: "5px" }}>H</Avatar>
                             <h5 style={{ textAlign: "left" }}>username</h5>
                         </div>
                         <p>content</p>
