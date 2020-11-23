@@ -10,6 +10,7 @@ function auth(req, res, next) {
     //If token exists check if it's varified or valid
     try {
         const verified = jwt.verify(token, process.env.TOKEN_SECRET)
+        console.log("verified".verified )
         req.user = verified
         res.header('authToken', token)
         next()

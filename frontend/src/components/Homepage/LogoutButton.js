@@ -27,11 +27,12 @@ export const Button = ({
                 //destroy the token 
                 onClick={() => {
                     $.ajax({
-                        method: 'POST',
+                        method: 'POST', 
                         url: '/logout',
                         success: (res) => {
                             window.location.href = "/"
-                        },
+                            localStorage.removeItem("user-id")
+                        }, 
                         error: (err) => {
                             console.log(err)
                         }

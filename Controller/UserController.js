@@ -13,6 +13,7 @@ exports.signUpUser = async (req, res) => {
     // User Data when Signing up
     userMail = req.body.userMail
     userpas = req.body.userPass
+    console.log(req.body)
     if (!req.body.userfirstName) {
         return res.status(451).send('error')
     }
@@ -44,7 +45,7 @@ exports.signUpUser = async (req, res) => {
                     return res.status(400).send('error')
                 }
                 var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
-                res.cookie('authToken', token)
+                res.cookie('authToken', token).json({userId:saveduse._id})
                 return res.status(200).send('created')
             })
         }
@@ -76,7 +77,7 @@ exports.loginUser = (req, res) => {
             else {
                 var token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
                 res.cookie('authToken', token)
-                return res.status(200).send(token)
+                return res.status(200).json({token,userId:user._id})
             }
         }
     })
@@ -84,7 +85,7 @@ exports.loginUser = (req, res) => {
 
 //logout to remove token (token value = empty)
 exports.userlogout = (req, res) => {
-    res.cookie('authToken', '')
+    res.cookie('authToken', '',{maxAge:1})
     res.status(200).send(req.user)
 }
 
@@ -107,4 +108,20 @@ exports.getuserinfo = (req, res) => {
             return res.status(200).send(userData)
         }
     })
+}
+
+
+//remove user
+exports.removeUser = (req, res) => {
+    //can put email 
+    UserModel.findOneAndRemove({ _id: req.body._id })
+        .then((data) => {
+            console.log('REMOVED:')
+            console.log(data)
+            res.status(200).send('Removed')
+        })
+        .catch((err) => {
+            console.log(err)
+            res.status(400).send('Err in removing')
+        })
 }

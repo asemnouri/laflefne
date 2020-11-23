@@ -35,7 +35,7 @@ class Cards extends React.Component {
                         {/* to display the last two trips */}
                             {this.props.testtrips.slice(3, 5).map((trip) =>
                                 <Carditem
-                                    src={trip.image[0][0]}
+                                    // src={trip.image[0][0]}
                                     label={trip.name}
                                     text={trip.explore}
                                     path='/trip'
