@@ -41,9 +41,11 @@ if (process.env.NODE_ENV === 'production') {
 //    }
 
 //  }) 
+
 app.get('/', (req, res) => {
   res.json({ mess: "welcome welcome" })
 })
+
 app.use('/', routers)
 module.exports = app;
 
