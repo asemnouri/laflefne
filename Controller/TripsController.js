@@ -74,29 +74,35 @@ exports.getmytrips = (req, res) => {
     })
 }
 
-
 //create trip
 exports.addTrip = (req, res) => {
-    console.log('Here creating trip******************************************************')
+    console.log('Here creating trip**************************//////////////////****************************')
     //must create chat room for the trip before saving to db
-    var trip;
-    trip = new trips({
-        image: req.body.data.image, //array
-        tripType: req.body.data.tripType,
-        name: req.body.data.name,
-        explore: req.body.data.explore,
-        price: req.body.data.price,
-        date: req.body.data.date,
-        deadLine: req.body.data.deadLine,
-        tripGuide: req.body.data.tripGuide,
-        maximumNumPerTrip: req.body.data.maximumNumPerTrip,
-        idOfTourist: req.body.data.idOfTourist, //array
-        discription: req.body.data.discription
-    })
+      var trip;
+      var image_ = req.body.data.image[0].split('-')
+      var disc = req.body.data.discription[0].split('-');
+      var disc_obj = {}
+      for (var i = 0; i < disc.length; i++) {
+        disc_obj[i] = disc[i]
+      }
+     trip = new trips({
+                image: image_, //array
+                tripType: req.body.data.tripType[0],
+                name: req.body.data.name[0],
+                price: req.body.data.price[0],
+                date: req.body.data.date[0],
+                deadLine: req.body.data.deadLine[0],
+                tripGuide: req.body.data.tripGuide[0],
+                maximumNumPerTrip: req.body.data.maximumNumPerTrip[0],
+                idOfTourist: [], //array
+                discription: disc_obj,
+                chatData:[]
+            })
     trip.save().then((trip) => {
         console.log("trip saved")
         res.status(200).json(trip)
     })
+
         .catch((err) => {
             console.log(err)
             console.log('Trip not saved')
