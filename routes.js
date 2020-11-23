@@ -18,7 +18,7 @@ routers.post('/payment', paymentController.payment)
 routers.get('/check', auth, (req, res) => {
     res.send(paymentController.check(req, res))
 })
- 
+
 //Trips Controller 
 const tripController = require('./Controller/TripsController')
 routers.get('/gettrips', tripController.tripsList)
