@@ -46,7 +46,7 @@ exports.signUpUser = async (req, res) => {
                 }
                 var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
                 res.cookie('authToken', token).json({userId:saveduse._id})
-                return res.status(200).send('created')
+                // return res.status(200).send('created')
             })
         }
         else
