@@ -46,10 +46,10 @@ let userSchema = mongoose.Schema({
 
 
 
-let RoomChat = mongoose.model("RoomChat", roomChatSchema);
+
 let trips = mongoose.model("tripsinfo", tripsSchema);
 let users = mongoose.model("userinfo", userSchema);
-let payment = mongoose.model("paymentinfo", paymentSchema);
+//let payment = mongoose.model("paymentinfo", paymentSchema);
 
 // var test = new RoomChat({
 //     tripId: 1,
@@ -90,6 +90,6 @@ let payment = mongoose.model("paymentinfo", paymentSchema);
 
 
 module.exports.users = users
-module.exports.payment = payment
+//module.exports.payment = payment
 module.exports.trips = trips
-module.exports.RoomChat = RoomChat
+//module.exports.RoomChat = RoomChat

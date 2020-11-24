@@ -1,7 +1,7 @@
 import React from 'react';
 import Carditem from './Carditem';
 import './A-Style.css'
-
+import StripeCheckoutButton from '../stripe/stripe-component'
 class Cards extends React.Component {
     constructor(props) {
         super(props)
@@ -17,10 +17,11 @@ class Cards extends React.Component {
         return (
             <div className='cards'>
                 <h1>Check Out Our Trips</h1>
+                <StripeCheckoutButton />
                 <div className='cards__container'>
                     <div className="cards__wrapper">
                         <ul className="cards__items">
-                        {/* to display the 1st three trip */}
+                            {/* to display the 1st three trip */}
                             {this.props.testtrips.slice(0, 3).map((trip) =>
                                 <Carditem
                                     src={trip.image[0][0]}
@@ -32,7 +33,7 @@ class Cards extends React.Component {
                                 />)}
                         </ul>
                         <ul className="cards__items">
-                        {/* to display the last two trips */}
+                            {/* to display the last two trips */}
                             {this.props.testtrips.slice(3, 5).map((trip) =>
                                 <Carditem
                                     // src={trip.image[0][0]}

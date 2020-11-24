@@ -39,20 +39,20 @@ exports.signUpUser = async (req, res) => {
             newuser.userNum = req.body.userNum
             newuser.trips = []
             newuser.newsLetter = req.body.newsLetter,
-            newuser.admin=false
+                newuser.admin = false
             newuser.save((err, saveduse) => {
                 if (err) {
                     console.log(err)
                     return res.status(400).send('error')
                 }
                 var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
-                res.cookie('authToken', token).json({userId:saveduse._id})
-                return res.status(200).send('created')
+                res.cookie('authToken', token).json({ userId: saveduse._id })
+
             })
         }
         else
             return res.status(406).send('user existed')
-    }) 
+    })
 }
 
 //loging in 
@@ -78,7 +78,7 @@ exports.loginUser = (req, res) => {
             else {
                 var token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
                 res.cookie('authToken', token)
-                return res.status(200).json({token,userId:user._id})
+                return res.status(200).json({ token, userId: user._id })
             }
         }
     })
@@ -86,7 +86,7 @@ exports.loginUser = (req, res) => {
 
 //logout to remove token (token value = empty)
 exports.userlogout = (req, res) => {
-    res.cookie('authToken', '',{maxAge:1})
+    res.cookie('authToken', '', { maxAge: 1 })
     res.status(200).send(req.user)
 }
 
