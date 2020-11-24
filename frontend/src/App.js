@@ -10,7 +10,7 @@ import Trips from './components/Homepage/Cards'
 import Login from './components/user/login'
 import Trip from './components/trips/trips'
 import Signup from './components/user/signup'
-import Payment from './components/payment/payment'
+// import Payment from './components/payment/payment'
 import MyTrip from './components/trips/mytrips'
 import Profile from './components/user/Profile';
 import Navbar2 from './components/Homepage/Navbar-login';
@@ -20,7 +20,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      islogin: true,
+      islogin: true, 
       isuser: false,
       tokenin: "",
       testtrips: [],
@@ -130,7 +130,7 @@ class App extends React.Component {
         <Router>
           {nav}
           <Switch>
-            {comp}
+            {comp} 
             <Route
               path="/"
               exact render={(props) => <Home userid={this.state.userid} testtrips={this.state.testtrips} trip={this.state.thetrip} />}
@@ -150,7 +150,7 @@ class App extends React.Component {
             />
             <Route path="/trip" exact component={Trip} />
             <Route path="/mytrip" exact component={MyTrip} />
-            <Route path="/payment" exact component={Payment} />
+            {/* <Route path="/payment" exact component={Payment} /> */}
 
             <Route path="/user/users" exact render={() => {
               if (this.state.userid.admin === true) {

@@ -1,13 +1,15 @@
 //requiring the payment schema
 const { Payment } = require('../DataModel')
-
-
+//requiring the trips schema
+const trips = require("../DataModel").trips
+const users = require("../DataModel").users
 
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.payment = (req, res) => {
+    var objToRet;
     console.log('reached ********************************')
     console.log(req.body.token.id)
     console.log(' ********************************')
@@ -37,6 +39,16 @@ exports.payment = (req, res) => {
             })
             paymentR.save()
                 .then((obj) => {
+                    objToRet = obj
+                    //get the user and add the trip to his array
+                    //get the trip and add the user to its idOfTourist
+                    users.findOne({ _id: req.body.userid }, (err, user) => {
+                        user.trips.push(trips)
+                    })
+                    trips.findOne({ _id: req.body.tripId }, (err, trip) => {
+                        trip.idOfTourist.push()
+                    })
+                    //make it for the last then 
                     res.status(200).send({ success: stripeRes, payment_record: obj })
                 })
                 .catch((err) => {

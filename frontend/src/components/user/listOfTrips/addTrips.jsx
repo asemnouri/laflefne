@@ -94,7 +94,7 @@ class AddTrips extends React.Component {
             <br></br>
             <div className='picContainer'>
               <img className="img1"
-                src={this.state.profileimg}
+                src={this.state.profileimg ||'https://i.imgur.com/ejGOOnV.jpg'}
                 alt="userPic"
               />
             </div>

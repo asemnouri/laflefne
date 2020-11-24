@@ -78,34 +78,36 @@ exports.getmytrips = (req, res) => {
 exports.addTrip = (req, res) => {
     console.log('Here creating trip**************************//////////////////****************************')
     //must create chat room for the trip before saving to db
-      var trip;
-      var image_ = req.body.data.image[0].split('-')
-      var disc = req.body.data.discription[0].split('-');
-      var disc_obj = {}
-      for (var i = 0; i < disc.length; i++) {
+    var trip;
+    var image_ = req.body.data.image[0].split('-')
+    var disc = req.body.data.discription[0].split('-');
+    var disc_obj = {}
+    for (var i = 0; i < disc.length; i++) {
         disc_obj[i] = disc[i]
-      }
-     trip = new trips({
-                image: image_, //array
-                tripType: req.body.data.tripType[0],
-                name: req.body.data.name[0],
-                price: req.body.data.price[0],
-                date: req.body.data.date[0],
-                deadLine: req.body.data.deadLine[0],
-                tripGuide: req.body.data.tripGuide[0],
-                maximumNumPerTrip: req.body.data.maximumNumPerTrip[0],
-                idOfTourist: [], //array
-                discription: disc_obj,
-                chatData:[]
-            })
+    }
+    trip = new trips({
+        image: image_, //array
+        tripType: req.body.data.tripType[0],
+        name: req.body.data.name[0],
+        price: req.body.data.price[0],
+        date: req.body.data.date[0],
+        deadLine: req.body.data.deadLine[0],
+        tripGuide: req.body.data.tripGuide[0],
+        maximumNumPerTrip: req.body.data.maximumNumPerTrip[0],
+        idOfTourist: [], //array
+        discription: disc_obj,
+        chatData: [],
+        explore:"Explore Palestine"
+    })
     trip.save().then((trip) => {
         console.log("trip saved")
         res.status(200).json(trip)
     })
 
         .catch((err) => {
-            console.log(err)
+            console.log(err.message)
             console.log('Trip not saved')
             res.status(404).send("Trip not saved")
         })
 }
+

@@ -15,10 +15,10 @@ const StripeCheckoutButton = ({ price, userid, tripId }) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                amount: 2000,//priceForStripe,
-                token: token,
-                userid: '5fbcd1fa7196951b505fad3f',//userid
-                tripId: tripId
+                amount: priceForStripe,//priceForStripe,
+                token,
+                userid,//userid
+                tripId
             })
         })
             .then(response => response.json())

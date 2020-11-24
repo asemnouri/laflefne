@@ -16,35 +16,53 @@ class Trip extends React.Component {
             },
             booked: false,
             whobookit: 0,
-            maxnoPerTrip: 0
+            maxnoPerTrip: 0,
+            chatBoxData: []
         }
     }
     //to get the one trip data from db and display it
-    componentDidMount() {
-        this.setState({
+    componentDidMount = async () => {
+        await this.setState({
             thetrip: this.props.location.state.trip,
             whobookit: this.props.location.state.trip.idOfTourist.length,
             maxnoPerTrip: this.props.location.state.trip.maximumNumPerTrip
         })
         document.documentElement.scrollTop = 0;
+        console.log("naaaaaaaaaaaaame", this.state.thetrip.name)
+        fetch('/getchatRoom', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: this.state.thetrip.name }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                this.setState({ chatBoxData: data.chatData })
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
     render() {
         var today = new Date();
         let statedata = {}
         let pathname = '/trip'
-        if (this.props.location.state.userid && this.props.location.state.trip) {
-            var ex = new Date(this.props.location.state.trip.deadLine)
-            if (!this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid) && (this.state.maxnoPerTrip !== this.state.whobookit) && (ex.getTime() >= today.getTime())) {
-                pathname = '/payment'
-                statedata = {
-                    tripid: this.props.location.state.trip._id,
-                    userid: this.props.location.state.userid
-                }
-            }
-        }
+        // if (this.props.location.state.userid && this.props.location.state.trip) {
+        //     var ex = new Date(this.props.location.state.trip.deadLine)
+        //     if (!this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid) && (this.state.maxnoPerTrip !== this.state.whobookit) && (ex.getTime() >= today.getTime())) {
+        //         pathname = '/payment'
+        //         statedata = {
+        //             tripid: this.props.location.state.trip._id,
+        //             userid: this.props.location.state.userid
+        //         }
+        //     }
+        // }
 
         return (
             <div >
+                {/* display the icons on the trip comp */}
                 <div className="d-flex flex-wrap justify-content-around" style={{ 'textAlign': 'center', 'marginTop': '20px' }}>
                     <div>
                         <img className='imgs' src='https://www.flaticon.com/svg/static/icons/svg/2945/2945620.svg' alt='Trip Map'></img>
@@ -79,16 +97,15 @@ class Trip extends React.Component {
                             key: value,
                             dayno: value,
                             dayinfo: this.state.thetrip.discription[value],
-                            imgs: this.state.thetrip.image[parseInt(value) - 1]
+                            imgs: this.state.thetrip.image[parseInt(value) - 1] || this.state.thetrip.image[0]
                         }
+                        console.log(props)
                         return (<div><Day {...props}></Day>
                             <br></br></div>)
                     }
                     )}
                 </div>
-
-
-                <ScrollDialog />
+                <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
                 <br></br>
                 <div className="bookx">
                     <small id="nobook"></small>
