@@ -49,8 +49,8 @@ app.use('/', routers)
 module.exports = app;
 
 
-var port = 4000; //process.env.PORT ||
+// var port = 4000; //process.env.PORT ||
 
-app.listen(port, () => {
-  console.log(`listening to ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`listening to ${port}`)
+// })

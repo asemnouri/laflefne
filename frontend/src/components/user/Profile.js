@@ -107,25 +107,13 @@ class Profile extends React.Component {
               </div>
               <div>
 
-                <Link to="/user">
-                  <button>
-                    user books
-                 </button>
-                </Link>
-                <Link to="/user/users">
-                  <button>
-                    users
-                 </button>
-                </Link>
-                <Link to="/user/addtrip">
-                  <button>
-                    add a new trip
-                  </button>
-                </Link>
-
-
                 {this.props.userid.admin ?
                   <div>
+                  <Link to="/user">
+                      <button>
+                        user books
+                      </button>
+                    </Link>
                     <Link to="/user/users">
                       <button>
                         users
@@ -136,11 +124,7 @@ class Profile extends React.Component {
                         add a new trip
                       </button>
                     </Link>
-                    <Link to="/user">
-                      <button>
-                        user books
-                      </button>
-                    </Link>
+                   
                   </div>
                   : <Link to="/user">
                     <button>

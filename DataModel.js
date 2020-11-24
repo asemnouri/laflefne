@@ -26,7 +26,7 @@ let tripsSchema = mongoose.Schema({
     deadLine: Date,
     tripGuide: String,
     maximumNumPerTrip: Number,
-    idOfTourist: [String],//sending by email from user
+    idOfTourist: [String],//sending user id
     discription: {
         type: Object
     },
