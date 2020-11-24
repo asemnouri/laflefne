@@ -2,7 +2,7 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
 
-const StripeCheckoutButton = ({ price, userid }) => {
+const StripeCheckoutButton = ({ price, userid,tripId }) => {
     price = parseInt(price);
     const priceForStripe = price * 100;
     const publishableKey = 'pk_test_51HoFgjCxgtcfoZwvsKFbfVjfG9zEtZV8SlBCIQ9gziIN1dFFj5WbV4vgjHGQslUdfoenn0j5bGqHu9fwKBVb8WvB0077gk8H7w'
@@ -15,9 +15,10 @@ const StripeCheckoutButton = ({ price, userid }) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                amount: 2000,//priceForStripe,
-                token: token,
-                userid: '5fbcd1fa7196951b505fad3f'//userid
+                amount: priceForStripe,//priceForStripe,
+                token,
+                userid,//userid
+                tripId
             })
         })
             .then(response => response.json())

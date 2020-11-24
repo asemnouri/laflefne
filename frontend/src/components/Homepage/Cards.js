@@ -3,7 +3,6 @@ import Carditem from './Carditem';
 import './A-Style.css'
 
 import StripeCheckoutButton from '../stripe/stripe-component'
-class Cards extends React.Component {
 
 
 class Cards extends React.Component {
@@ -39,7 +38,7 @@ class Cards extends React.Component {
                         <ul className="cards__items">
 
                         {/* to display the last two trips */}
-                            {this.props.testtrips.slice(3, 6).map((trip) =>
+                            {this.props.testtrips.slice(3, 8).map((trip) =>
                                 <Carditem
                                     src={trip.image[0][0]}
                                     label={trip.name}
