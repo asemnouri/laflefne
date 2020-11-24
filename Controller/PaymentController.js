@@ -1,13 +1,12 @@
 //requiring the payment schema
 const { Payment } = require('../DataModel')
-
-
-
-
+//requiring the trips schema
+const trips = require("../DataModel").trips
+const users = require("../DataModel").users
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 exports.payment = (req, res) => {
+    var objToRet;
     console.log('reached ********************************')
     console.log(req.body.token.id)
     console.log(' ********************************')
@@ -36,7 +35,26 @@ exports.payment = (req, res) => {
                 exp_month: stripeRes.source.exp_month
             })
             paymentR.save()
-                .then((obj) => {
+                .then(async (obj) => {
+                    objToRet = obj
+                    //get the user and add the trip to his array
+                    //get the trip and add the user to its idOfTourist
+                    let email = ""
+                    await users.findOne({ _id: req.body.userid }, (err, user) => {
+                        let res = user.trips.push(req.body.tripId)
+                        email = user.email
+                        user.updateOne({ trips: res })
+                            .then(data => console.log(data))
+                            .catch(err => console.log(err))
+                    })
+                    
+                    await trips.findOne({ _id: req.body.tripId }, (err, trip) => {
+                        let res = trip.idOfTourist.push(email)
+                        trip.updateOne({ idOfTourist: res })
+                            .then(data => console.log(data))
+                            .catch(err => console.log(err))
+                    })
+                    //make it for the last then 
                     res.status(200).send({ success: stripeRes, payment_record: obj })
                 })
                 .catch((err) => {
@@ -44,9 +62,6 @@ exports.payment = (req, res) => {
                     res.status(200).send({ success: stripeRes, payment_record: 'payment successful but not saved in user payments ' })
                 })
         }
-
     })
 }
-
-
 exports.check = (req, res) => { return (req.user) }
