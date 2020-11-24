@@ -2,7 +2,7 @@ import React from 'react';
 import Carditem from './Carditem';
 import './A-Style.css'
 
-class Cards extends React.Component {
+class Cards extends React.Component { 
     constructor(props) {
         super(props)
         this.state = {
@@ -33,9 +33,9 @@ class Cards extends React.Component {
                         </ul>
                         <ul className="cards__items">
                         {/* to display the last two trips */}
-                            {this.props.testtrips.slice(3, 5).map((trip) =>
+                            {this.props.testtrips.slice(3, 6).map((trip) =>
                                 <Carditem
-                                    // src={trip.image[0][0]}
+                                    src={trip.image[0][0]}
                                     label={trip.name}
                                     text={trip.explore}
                                     path='/trip'
