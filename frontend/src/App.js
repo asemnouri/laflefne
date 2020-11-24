@@ -137,7 +137,7 @@ class App extends React.Component {
             />
             <Route
               path="/trips"
-              render={(props) => <Trips userid={this.state.userid} testtrips={this.state.testtrips} trip={this.state.thetrip} />}
+              render={(props) => <Trips admin ={this.state.userid.admin} userid={this.state.userid} testtrips={this.state.testtrips} trip={this.state.thetrip} />}
             />
             <Route path="/sign-up" exact component={Signup} />
             <Route path="/sign-in" exact component={Login} />

@@ -113,7 +113,7 @@ class Trip extends React.Component {
                 {/* put user id in trip */}
                 {/* put trip id in the user */}
                 {
-                 this.state.idOfTourist.includes(localStorage.getItem("user-id"))?
+                 this.props.admin ||this.state.idOfTourist.includes(localStorage.getItem("user-id"))?
                  <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
                 :
                 <StripeCheckoutButton componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId}/>

@@ -90,12 +90,12 @@ export default function ScrollDialog({ chatBoxData, componentDidM, name }) {
                             chatBoxData.length ?
                                 chatBoxData.map(ele => {
                                     return (
-                                        <div>
+                                        <div style={{marginBottom:"15px"}}>
                                             <div style={{ display: "flex", justifyContent: "start", alignItems: "center" }}>
-                                                <Avatar sizes="small" style={{ marginRight: "5px" }}>H</Avatar>
+                                                <Avatar sizes="small" style={{ marginRight: "5px" }}>{ele.name[0]}</Avatar>
                                                 <h5 style={{ textAlign: "left" }}>{ele.name}</h5>
                                             </div>
-                                            <p>{ele.comment}</p>
+                                            <p style={{marginLeft:"50px"}}>{ele.comment}</p>
                                         </div>
                                     )
                                 })
