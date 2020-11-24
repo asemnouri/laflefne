@@ -47,7 +47,7 @@ exports.signUpUser = async (req, res) => {
                 }
                 var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
                 res.cookie('authToken', token).json({userId:saveduse._id})
-                return res.status(200).send('created')
+                // return res.status(200).send('created')
             })
         }
         else
@@ -95,8 +95,8 @@ exports.checkuser = (req, res) => { return (req.user) }
 
 //get user info and display it to user profile
 exports.getuserinfo = (req, res) => {
+    console.log("sdfghjkl;",req.body.id)
     UserModel.findOne({ _id: req.body.id }, (err, userData) => {
-        console.log(req.body._id)
         if (err) {
             console.log(err)
             return res.status(500).send('error')
@@ -106,6 +106,7 @@ exports.getuserinfo = (req, res) => {
             return res.status(404).send('not found user')
         }
         else {
+            console.log("userrrrrrrrrrrrr",userData)
             return res.status(200).send(userData)
         }
     })
