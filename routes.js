@@ -12,6 +12,7 @@ routers.get('/checkuser', auth, (req, res) => {
 })
 routers.post('/getuserinfo', userController.getuserinfo)
 routers.post('/removeuser', userController.removeUser)
+routers.get('/alldata', userController.alldata)
 //Payment Controller 
 const paymentController = require('./Controller/PaymentController')
 routers.post('/payment', paymentController.payment)
