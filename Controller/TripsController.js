@@ -104,8 +104,9 @@ exports.addTrip = (req, res) => {
     })
 
         .catch((err) => {
-            console.log(err)
+            console.log(err.message)
             console.log('Trip not saved')
             res.status(404).send("Trip not saved")
         })
 }
+
