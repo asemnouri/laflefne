@@ -25,8 +25,8 @@ class App extends React.Component {
       tokenin: "",
       testtrips: [],
       userid: "",
-      admin:false,
-      realUserId:""
+      admin: false,
+      realUserId: ""
     }
     this.changeLogInStatus = this.changeLogInStatus.bind(this)
     this.getTrips = this.getTrips.bind(this)
@@ -50,7 +50,7 @@ class App extends React.Component {
     var alltrips = []
     $.ajax({
       type: "GET",
-      url: "/gettrips", 
+      url: "/gettrips",
       success: (res) => {
         for (var i in res) {
           alltrips.push(res[i])
@@ -141,25 +141,36 @@ class App extends React.Component {
             />
             <Route path="/sign-up" exact component={Signup} />
             <Route path="/sign-in" exact component={Login} />
-            <Route path="/user" exact render={(props) => 
-            !this.state.islogin?
-            <Redirect to="/"/>
-            :
-            <Profile userid={this.state.userid} />
+            <Route path="/user" exact render={(props) =>
+              !this.state.islogin ?
+                <Redirect to="/" />
+                :
+                <Profile userid={this.state.userid} />
             }
             />
             <Route path="/trip" exact component={Trip} />
             <Route path="/mytrip" exact component={MyTrip} />
             <Route path="/payment" exact component={Payment} />
 
-            <Route path="/user/users" exact render={() => <ListOfUsers userid={this.state.userid} />} />
-            <Route path="/user/addtrip" exact render={() => <AddTrips userid={this.state.userid} />} />
+            <Route path="/user/users" exact render={() => {
+              if (this.state.userid.admin === true) {
+                return <ListOfUsers userid={this.state.userid} />
+              }
+            }} />
+
+
+            <Route path="/user/addtrip" exact render={() => {
+              if (this.state.userid.admin === true) {
+                return <AddTrips userid={this.state.userid} />
+              }
+            }
+            } />
           </Switch>
           <Footer />
         </Router>
       </>
     )
-  } 
+  }
 }
 
 export default App;

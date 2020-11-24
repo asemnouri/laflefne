@@ -30,8 +30,7 @@ let tripsSchema = mongoose.Schema({
     discription: {
         type: Object
     },
-    chatData: [],
-    explore: String
+    chatData: []
 
 })
 let userSchema = mongoose.Schema({
@@ -54,10 +53,12 @@ let userSchema = mongoose.Schema({
 
 
 
+
 // let RoomChat = mongoose.model("RoomChat", roomChatSchema);
 let trips = mongoose.model("tripsinfo", tripsSchema);
 let users = mongoose.model("userinfo", userSchema);
 // let payment = mongoose.model("paymentinfo", paymentSchema);
+
 
 // var test = new RoomChat({
 //     tripId: 1,
@@ -96,8 +97,42 @@ let users = mongoose.model("userinfo", userSchema);
 
 // tripTest.save().then((data) => console.log(data)).catch((err) => console.log(err))
 
-
+var Float = require('mongoose-float').loadType(mongoose);
+const Schema = mongoose.Schema;
+let paymentSchema = new Schema({
+    // userid: Number,
+    userid: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    amount: {
+        type: Float,
+        required: true
+    },
+    exp_year: {
+        type: Number,
+        required: true,
+    },
+    exp_month: {
+        type: String,
+        required: true,
+    },
+    line1: {
+        type: String,
+    },
+    city: String,
+    country: String,
+    last4: {
+        type: String,
+        required: true
+    }
+}, { timestamps: true });
+let Payment = mongoose.model('Payment', paymentSchema);
+module.exports.Payment = Payment;
 module.exports.users = users
+
 // module.exports.payment = payment
 module.exports.trips = trips
 // module.exports.RoomChat = RoomChat
+

@@ -9,7 +9,7 @@ class CardItem extends React.Component {
 
         }
     }
- //to control the css of the cards   
+    //to control the css of the cards   
     render() {
         return (
             <>
