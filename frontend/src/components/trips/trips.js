@@ -2,6 +2,8 @@ import React from "react";
 import './trips.css';
 import { Link } from 'react-router-dom';
 import Day from './days'
+import ScrollDialog from "./chattbox/chattbox.jsx"
+
 class Trip extends React.Component {
 
     constructor(props) {
@@ -17,7 +19,7 @@ class Trip extends React.Component {
             maxnoPerTrip: 0
         }
     }
-//to get the one trip data from db and display it
+    //to get the one trip data from db and display it
     componentDidMount() {
         this.setState({
             thetrip: this.props.location.state.trip,
@@ -85,36 +87,13 @@ class Trip extends React.Component {
                     )}
                 </div>
 
-                <Link to={{
-                    pathname: pathname,
-                    state: statedata,
-                }}   >
-                    <div style={{ 'display': 'block' }}>
-                        <p align="center" style={{ 'marginTop': '60px' }}>
-                            <input className='btn btn-dark' type="button" value="Book this trip"
-                                onClick={() => {
-                                    console.log(this.props.location.state.userid)
-                                    if (!this.props.location.state.userid) {
-                                        console.log(`you can't book the trip log in first`)
-                                        document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>Sign Up To Book The Trip</strong></div>"
-                                    }
-                                    if (this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid))
-                                        document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>You had alredy book this trip!</strong></div>"
 
-                                    if (this.state.maxnoPerTrip === this.state.whobookit) {
-                                        document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>No More seats, check other trips</strong></div>"
-                                    } if (ex.getTime() < today.getTime()) {
-                                        document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>dead line ended</strong></div>"
-                                    }
-                                    console.log('pay pay')
-                                }} />
-                        </p>
-                    </div></Link>
+                <ScrollDialog />
                 <br></br>
                 <div className="bookx">
                     <small id="nobook"></small>
                 </div>
-            </div >
+            </div>
         )
     }
 

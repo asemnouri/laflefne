@@ -11,19 +11,26 @@ routers.get('/checkuser', auth, (req, res) => {
     res.send(userController.checkuser(req, res))
 })
 routers.post('/getuserinfo', userController.getuserinfo)
-
+routers.post('/removeuser', userController.removeUser)
 //Payment Controller 
 const paymentController = require('./Controller/PaymentController')
 routers.post('/payment', paymentController.payment)
 routers.get('/check', auth, (req, res) => {
     res.send(paymentController.check(req, res))
 })
- 
+
 //Trips Controller 
 const tripController = require('./Controller/TripsController')
 routers.get('/gettrips', tripController.tripsList)
-routers.post('/addtrip', tripController.updateTrip)
+//routers.post('/addtrip', tripController.updateTrip)
 routers.get('/filldata', tripController.fillTrips)
 routers.post('/getmytrips', tripController.getmytrips)
+
+routers.post('/addTrip', tripController.addTrip)
+
+//Chat controller
+const chatRoomController = require('./Controller/chatRoomController')
+routers.get('/chatRoom', chatRoomController.getAllChat)
+routers.post('/chatRoom', chatRoomController.postMsg)
 
 module.exports = routers;

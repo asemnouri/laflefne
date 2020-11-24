@@ -1,10 +1,9 @@
 import React from "react";
-import './Profile.css';
-import Carditem from './UserCarditem';
+import '../Profile.css';
+// import Carditem from './UserCarditem';
 import $ from 'jquery'
 import { Link } from "react-router-dom"
-import addTrips from "./listOfTrips/addTrips";
-class Profile extends React.Component {
+class ListOfUsers extends React.Component {
 
   constructor(props) {
     super(props)
@@ -17,7 +16,7 @@ class Profile extends React.Component {
     }
   }
 
-  //display the user info and user trips
+//display the user info and user trips
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     console.log(this.props.userid)
@@ -47,35 +46,9 @@ class Profile extends React.Component {
       }
     }
   }
-
+  
   render() {
-    let cards
-    if (this.state.mytrips) {
-      cards = <div> <ul className="cards__items">
-        {/* Display the user trip the first three */}
-        {this.state.mytrips.slice(0, 3).map((trip) =>
-          <Carditem
-            src={trip.image[0][0]}
-            label={trip.name}
-            text={trip.explore}
-            path='/mytrip'
-            trip={trip}
-          />)}</ul>
-        <ul className="cards__items">
-          {this.state.mytrips.slice(3, 5).map((trip) =>
-            <Carditem
-              src={trip.image[0][0]}
-              label={trip.name}
-              text={trip.explore}
-              path='/mytrip'
-              trip={trip}
-            />)}</ul>
-      </div>
-
-    }
-    else {
-      cards = <div>No Booked Trips Yet</div>
-    }
+   
     return (
       <div className="imgdiv">
         <div className="row" id="row">
@@ -106,50 +79,34 @@ class Profile extends React.Component {
                 <h6 className="text1">{this.props.userid.userNum}</h6>
               </div>
               <div>
-
-                {this.props.userid.admin ?
-                  <div>
-                    <Link to="/user/users">
-                      <button>
-                        users
-                        </button>
-                    </Link>
-                    <Link to="/user/addtrip">
-                      <button>
-                        add a new trip
-                      </button>
-                    </Link>
-                    <Link to="/user">
-                      <button>
-                        user books
-                      </button>
-                    </Link>
-                  </div>
-                  : <Link to="/user">
-                    <button>
-                      user books
-                      </button>
-                  </Link>
-                }
+              <Link to="/user">
+                  <button>
+                    user books
+                 </button>
+                </Link>
+                <Link to="/user/users">
+                  <button>
+                    users
+                 </button>
+                </Link>
+                <Link to="/user/addtrip">
+                  <button>
+                    add a new trip
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
           <div className="col left" id="column">
             <div className='cards__container' id="cards__container1">
               <div className="cards__wrapper">
-                <br></br>
-                <br></br>
+                {/* <br></br> */}
+                {/* <br></br> */}
                 {/* <div className="textContainer">
                   <h4 className="text">Booked Trips</h4>
-                </div>
-
+                </div> */}
                 <br></br>
-                where am i */}
-                {
-                  this.props.userid.admin ?
-                    <addTrips />
-                    : <div></div>
-                }
+                ameeeeeeeeeeeeed
               </div>
             </div>
           </div>
@@ -159,4 +116,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+export default ListOfUsers;

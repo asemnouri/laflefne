@@ -4,7 +4,7 @@ import Footer from './components/Homepage/Footer';
 import Home from './components/Homepage/Home'
 import $ from 'jquery'
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import './App.css';
 import Trips from './components/Homepage/Cards'
 import Login from './components/user/login'
@@ -14,8 +14,8 @@ import Payment from './components/payment/payment'
 import MyTrip from './components/trips/mytrips'
 import Profile from './components/user/Profile';
 import Navbar2 from './components/Homepage/Navbar-login';
-
-
+import ListOfUsers from "./components/user/listOfUsers/listOfUsers.jsx"
+import AddTrips from "./components/user/listOfTrips/addTrips.jsx"
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,9 @@ class App extends React.Component {
       isuser: false,
       tokenin: "",
       testtrips: [],
-      userid: ""
+      userid: "",
+      admin: false,
+      realUserId: ""
     }
     this.changeLogInStatus = this.changeLogInStatus.bind(this)
     this.getTrips = this.getTrips.bind(this)
@@ -139,11 +141,30 @@ class App extends React.Component {
             />
             <Route path="/sign-up" exact component={Signup} />
             <Route path="/sign-in" exact component={Login} />
-            <Route path="/user" exact render={(props) => <Profile userid={this.state.userid} />}
+            <Route path="/user" exact render={(props) =>
+              !this.state.islogin ?
+                <Redirect to="/" />
+                :
+                <Profile userid={this.state.userid} />
+            }
             />
             <Route path="/trip" exact component={Trip} />
             <Route path="/mytrip" exact component={MyTrip} />
             <Route path="/payment" exact component={Payment} />
+
+            <Route path="/user/users" exact render={() => {
+              if (this.state.userid.admin === true) {
+                return <ListOfUsers userid={this.state.userid} />
+              }
+            }} />
+
+
+            <Route path="/user/addtrip" exact render={() => {
+              if (this.state.userid.admin === true) {
+                return <AddTrips userid={this.state.userid} />
+              }
+            }
+            } />
           </Switch>
           <Footer />
         </Router>
