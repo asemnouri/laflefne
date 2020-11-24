@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const routers = require('./routes');
-const {trips}=require("./DataModel")
+// const {trips}=require("./DataModel")
 var cookieParser = require('cookie-parser')
 const auth = require('./auth')
 const path = require('path');
-
+// const cors=require("cors")
 const bodyParser = require('body-parser');
 
 
@@ -15,7 +15,7 @@ app.use(cookieParser())
 
 //connect frontend with backend
 // app.use(express.static(__dirname + '/frontend/build'))
-
+ 
 //for deployment
 // if (process.env.NODE_ENV === 'production') {
 //   app.use(express.static(__dirname + '/frontend/build'))
@@ -24,26 +24,33 @@ app.use(cookieParser())
 console.log("*************111111111*************")
 // app.get('/', (req, res) => {
 //   console.log('////////////////////////////////////////////////////////')
-//   res.send("okkkk")
+//   res.send("okkkk") 
 // })
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/frontend/build'))
 }
- app.post("/data",async (req,res)=>{
-   let result=req.body.data
-   console.log(result)
-   for(let i=0; i < result.length ; i++){
-    res.send(result[i])
-     let trip =new trips(result[i])
-     await trip.save()
-     .then(data=>console.log(data))
-     .catch(err=>console.log(err))
-   }
+//  app.post("/data",async (req,res)=>{
+//    let result=req.body.data
+//    console.log( result.length)
+//    for(let i=0; i<result.length;i++){
+//     // res.send(result[i])
+//      let trip =new trips(result[i])
+//      await trip.save()
+//      .then(data=>console.log(data))
+//      .catch(err=>console.log(err))
+//    }
+//  }) 
 
- }) 
 app.get('/', (req, res) => {
   res.json({ mess: "welcome welcome" })
 })
+
 app.use('/', routers)
 module.exports = app;
 
+
+var port = 4000; //process.env.PORT ||
+
+app.listen(port, () => {
+  console.log(`listening to ${port}`)
+})

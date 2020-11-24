@@ -3,6 +3,7 @@ import './Profile.css';
 import Carditem from './UserCarditem';
 import $ from 'jquery'
 import { Link } from "react-router-dom"
+import addTrips from "./listOfTrips/addTrips";
 class Profile extends React.Component {
 
   constructor(props) {
@@ -105,7 +106,7 @@ class Profile extends React.Component {
                 <h6 className="text1">{this.props.userid.userNum}</h6>
               </div>
               <div>
-              <Link to="/user">
+                <Link to="/user">
                   <button>
                     user books
                  </button>
@@ -128,12 +129,17 @@ class Profile extends React.Component {
               <div className="cards__wrapper">
                 <br></br>
                 <br></br>
-                <div className="textContainer">
+                {/* <div className="textContainer">
                   <h4 className="text">Booked Trips</h4>
                 </div>
 
                 <br></br>
-                {cards}
+                where am i */}
+                {
+                  this.props.userid.admin ?
+                    <addTrips />
+                    : <div></div>
+                }
               </div>
             </div>
           </div>

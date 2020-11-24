@@ -1,0 +1,36 @@
+.textField {
+    width: 200px;
+    background-color: transparent;
+}
+
+.container {
+    background-color: white;
+    width: 300px;
+}
+
+#typeName {
+    width: 50px;
+    background-color: red;
+    display: flex;
+    align-items: baseline;
+}
+
+
+/*yess*/
+.container {
+    display: 'flex';
+    background-color: transparent;
+    width: 120px;
+  }
+
+#people {
+    background-color: transparent;
+    border-radius: 6px; 
+    border: 1px solid #757575;
+    margin-top: 20px;
+}
+
+.textField {
+    padding-left: 10px;
+}
+

@@ -38,7 +38,8 @@ exports.signUpUser = async (req, res) => {
             newuser.userPass = hashedPass
             newuser.userNum = req.body.userNum
             newuser.trips = []
-            newuser.newsLetter = req.body.newsLetter
+            newuser.newsLetter = req.body.newsLetter,
+            newuser.admin=false
             newuser.save((err, saveduse) => {
                 if (err) {
                     console.log(err)
@@ -51,7 +52,7 @@ exports.signUpUser = async (req, res) => {
         }
         else
             return res.status(406).send('user existed')
-    })
+    }) 
 }
 
 //loging in 
@@ -94,8 +95,8 @@ exports.checkuser = (req, res) => { return (req.user) }
 
 //get user info and display it to user profile
 exports.getuserinfo = (req, res) => {
+    console.log("sdfghjkl;",req.body.id)
     UserModel.findOne({ _id: req.body.id }, (err, userData) => {
-        console.log(req.body._id)
         if (err) {
             console.log(err)
             return res.status(500).send('error')
@@ -105,23 +106,33 @@ exports.getuserinfo = (req, res) => {
             return res.status(404).send('not found user')
         }
         else {
+            console.log("userrrrrrrrrrrrr",userData)
             return res.status(200).send(userData)
         }
     })
 }
 
-
+exports.alldata = (req,res) =>{
+    UserModel.find()
+    .then(data=>{
+        console.log(data)
+        res.status(200).send(data)
+    }).catch(err=>{s
+        res.status(400).send('Err in users') 
+    })   
+}
 //remove user
 exports.removeUser = (req, res) => {
     //can put email 
+    console.log(req.body)
     UserModel.findOneAndRemove({ _id: req.body._id })
         .then((data) => {
             console.log('REMOVED:')
             console.log(data)
-            res.status(200).send('Removed')
+            res.status(200).json({Removed:true})
         })
         .catch((err) => {
             console.log(err)
-            res.status(400).send('Err in removing')
+            res.status(400).json({removed:false})
         })
 }

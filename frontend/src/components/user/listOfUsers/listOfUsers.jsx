@@ -6,19 +6,46 @@ import { Link } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 class ListOfUsers extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
       usename: '',
       useremail: '',
       mytrips: '',
+      arrayofuser: [],
+      _id: '',
       //defulat img for user
       profileimg: 'https://i.imgur.com/ejGOOnV.jpg'
     }
   }
 
   //display the user info and user trips
+
+  handelremove = (id) => {
+    // Simple POST request with a JSON body using fetch
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ _id:id })
+    };
+    fetch('/removeuser', requestOptions)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        this.componentDidMount()
+      })
+
+  }
+  handelgetdata = () => {
+    fetch('/alldata')
+      .then(response => response.json()).then((data) => {
+        console.log('whyit', data)
+        this.setState({ arrayofuser: data })
+      })
+
+  }
+
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     console.log(this.props.userid)
@@ -47,10 +74,11 @@ class ListOfUsers extends React.Component {
         })
       }
     }
+    this.handelgetdata()
   }
 
   render() {
-
+    console.log('aa', this.state.arrayofuser)
     return (
       <div className="imgdiv">
         <div className="row" id="row">
@@ -113,32 +141,43 @@ class ListOfUsers extends React.Component {
                 <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
                   UserName
                      </div>
-                  <div style={{marginTop:"1rem"}}> 
-                     ameed asmah  </div>
+                {this.state.arrayofuser.map((user) => {
+                  console.log('zz', user)
+                  return <div style={{ marginTop: "1rem" }}><p>{user.userName} </p>
+                  </div>
+                })}
               </div>
               <div style={{ flex: ".20", backgroundColor: "#ffffff70", borderLeft: ".5px solid", textAlign: "center" }}>
                 <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
                   Email
               </div>
-              <div style={{marginTop:"1rem"}}>ameed@gmail.com</div>
+                {this.state.arrayofuser.map((user) => {
+                  return <div style={{ marginTop: "1rem" }}><p>{user.userMail}</p></div>
+
+                })}
               </div>
               <div style={{ flex: ".20", backgroundColor: "#ffffff70", borderLeft: ".5px solid", textAlign: "center" }}>
                 <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
-              addUser
+                  Makeadmin
                 </div>
-                <div>
-                <Button variant="outlined" style={{marginTop:"1rem"}}>makeAdmin</Button>
-                </div>
-                </div>
+                {
+                  this.state.arrayofuser.map((user) => {
+                    return <div><Button variant="outlined" style={{ marginTop: ".4rem" }} >AddAdmin</Button> </div>
+                  })
+                }
+              </div>
               <div style={{ flex: ".20", backgroundColor: "#ffffff70", borderLeft: ".5px solid", textAlign: "center" }}>
-              <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
-                remove User
+                <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
+                  remove User
               </div>
-              <div>
-              <Button variant="outlined" style={{marginTop:"1rem"}}>removeUser</Button>
+                {
+                  this.state.arrayofuser.map((user) => {
+                    return <div><Button variant="outlined" style={{ marginTop: ".4rem" }} onClick={() => this.handelremove(user._id)}>removeUser</Button> </div>
+                  })
+                }
+
               </div>
-              </div>
-              
+
             </div>
 
           </div>
@@ -149,3 +188,4 @@ class ListOfUsers extends React.Component {
 }
 
 export default ListOfUsers;
+
