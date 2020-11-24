@@ -96,7 +96,8 @@ exports.addTrip = (req, res) => {
         maximumNumPerTrip: req.body.data.maximumNumPerTrip[0],
         idOfTourist: [], //array
         discription: disc_obj,
-        chatData: []
+        chatData: [],
+        explore:"Explore Palestine"
     })
     trip.save().then((trip) => {
         console.log("trip saved")

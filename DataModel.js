@@ -26,18 +26,26 @@ let tripsSchema = mongoose.Schema({
     deadLine: Date,
     tripGuide: String,
     maximumNumPerTrip: Number,
-    idOfTourist: [String],
+    idOfTourist: [String],//sending by email from user
     discription: {
         type: Object
     },
-    chatData: []
+    chatData: [],
+    explore: String
+
 })
 let userSchema = mongoose.Schema({
-    userName: String,
-    userMail: String,
+    userName:String,
+    userMail:{
+        type: String,
+        unique: true
+    },
     userPass: String,
     userNum: String,
-    trips: [String],
+    trips: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'trips',
+    }],
     userimage: String,
     newsLetter: Boolean,
     admin: Boolean
