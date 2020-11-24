@@ -2,6 +2,8 @@ import React from "react";
 import './trips.css';
 import { Link } from 'react-router-dom';
 import Day from './days'
+import ScrollDialog from "./chattbox/chattbox.jsx"
+
 class Trip extends React.Component {
 
     constructor(props) {
@@ -14,35 +16,53 @@ class Trip extends React.Component {
             },
             booked: false,
             whobookit: 0,
-            maxnoPerTrip: 0
+            maxnoPerTrip: 0,
+            chatBoxData: []
         }
     }
-//to get the one trip data from db and display it
-    componentDidMount() {
-        this.setState({
+    //to get the one trip data from db and display it
+    componentDidMount = async () => {
+        await this.setState({
             thetrip: this.props.location.state.trip,
             whobookit: this.props.location.state.trip.idOfTourist.length,
             maxnoPerTrip: this.props.location.state.trip.maximumNumPerTrip
         })
         document.documentElement.scrollTop = 0;
+        console.log("naaaaaaaaaaaaame", this.state.thetrip.name)
+        fetch('/getchatRoom', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: this.state.thetrip.name }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                this.setState({ chatBoxData: data.chatData })
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
     render() {
         var today = new Date();
         let statedata = {}
         let pathname = '/trip'
-        if (this.props.location.state.userid && this.props.location.state.trip) {
-            var ex = new Date(this.props.location.state.trip.deadLine)
-            if (!this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid) && (this.state.maxnoPerTrip !== this.state.whobookit) && (ex.getTime() >= today.getTime())) {
-                pathname = '/payment'
-                statedata = {
-                    tripid: this.props.location.state.trip._id,
-                    userid: this.props.location.state.userid
-                }
-            }
-        }
+        // if (this.props.location.state.userid && this.props.location.state.trip) {
+        //     var ex = new Date(this.props.location.state.trip.deadLine)
+        //     if (!this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid) && (this.state.maxnoPerTrip !== this.state.whobookit) && (ex.getTime() >= today.getTime())) {
+        //         pathname = '/payment'
+        //         statedata = {
+        //             tripid: this.props.location.state.trip._id,
+        //             userid: this.props.location.state.userid
+        //         }
+        //     }
+        // }
 
         return (
             <div >
+                {/* display the icons on the trip comp */}
                 <div className="d-flex flex-wrap justify-content-around" style={{ 'textAlign': 'center', 'marginTop': '20px' }}>
                     <div>
                         <img className='imgs' src='https://www.flaticon.com/svg/static/icons/svg/2945/2945620.svg' alt='Trip Map'></img>
@@ -65,7 +85,7 @@ class Trip extends React.Component {
                         <img className='imgs' src='https://www.flaticon.com/svg/static/icons/svg/3467/3467983.svg' alt='Date'></img>
                         <p>{new Date(this.state.thetrip.date).toLocaleDateString()}</p>
                     </div>
-                    <div> 
+                    <div>
                         <img className='imgs' src='https://www.flaticon.com/svg/static/icons/svg/3409/3409565.svg' alt='tripGuide'></img>
                         <p>{this.state.thetrip.tripGuide}</p>
                     </div>
@@ -77,44 +97,20 @@ class Trip extends React.Component {
                             key: value,
                             dayno: value,
                             dayinfo: this.state.thetrip.discription[value],
-                            imgs: this.state.thetrip.image[parseInt(value) - 1]
+                            imgs: this.state.thetrip.image[parseInt(value) - 1] || this.state.thetrip.image[0]
                         }
+                        console.log(props)
                         return (<div><Day {...props}></Day>
                             <br></br></div>)
                     }
                     )}
                 </div>
-
-                <Link to={{
-                    pathname: pathname,
-                    state: statedata,
-                }}   >
-                    <div style={{ 'display': 'block' }}>
-                        <p align="center" style={{ 'marginTop': '60px' }}>
-                            <input className='btn btn-dark' type="button" value="Book this trip"
-                                onClick={() => {
-                                    console.log(this.props.location.state.userid)
-                                    if (!this.props.location.state.userid) {
-                                        console.log(`you can't book the trip log in first`)
-                                        document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>Sign Up To Book The Trip</strong></div>"
-                                    }
-                                    if (this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid))
-                                        document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>You had alredy book this trip!</strong></div>"
-
-                                    if (this.state.maxnoPerTrip === this.state.whobookit) {
-                                        document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>No More seats, check other trips</strong></div>"
-                                    } if (ex.getTime() < today.getTime()) {
-                                        document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>dead line ended</strong></div>"
-                                    }
-                                    console.log('pay pay')
-                                }} />
-                        </p>
-                    </div></Link>
+                <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
                 <br></br>
                 <div className="bookx">
                     <small id="nobook"></small>
                 </div>
-            </div >
+            </div>
         )
     }
 
