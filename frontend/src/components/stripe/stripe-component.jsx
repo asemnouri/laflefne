@@ -1,14 +1,36 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
-const StripeCheckoutButton = ({ price }) => {
+
+const StripeCheckoutButton = ({ price, userid }) => {
     price = parseInt(price);
     const priceForStripe = price * 100;
     const publishableKey = 'pk_test_51HoFgjCxgtcfoZwvsKFbfVjfG9zEtZV8SlBCIQ9gziIN1dFFj5WbV4vgjHGQslUdfoenn0j5bGqHu9fwKBVb8WvB0077gk8H7w'
 
     const onToken = token => {
-        console.log(token);
-        alert('Payment Successful')
+        console.log('token in stripe: ', token)
+        fetch('/payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: 2000,//priceForStripe,
+                token: token,
+                userid: '5fbcd1fa7196951b505fad3f'//userid
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Payment Successful');
+            })
+            .catch(err => {
+                console.log('Payment error: ', err)
+                alert('Payment Not Successful')
+            })
+
+
     }
     return (
         <StripeCheckout
