@@ -4,8 +4,8 @@ dotenv.config()
 //for mongo db 
 const mongoose = require('mongoose');
 //(check .env file!)
-const dbURI = 'mongodb://localhost:27017/laflefne'
-//const dbURI = 'mongodb+srv://asemOne:asem1234@cluster0.xqniz.mongodb.net/laffeh?retryWrites=true&w=majority'
+// const dbURI = 'mongodb://localhost:27017/laflefne'
+const dbURI = 'mongodb+srv://asemOne:asem1234@cluster0.xqniz.mongodb.net/laffeh?retryWrites=true&w=majority'
 //mongoose.connect(process.env.DB_CONNECT, { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true })
 mongoose.connect(dbURI, { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true })
 var db = mongoose.connection
@@ -26,18 +26,25 @@ let tripsSchema = mongoose.Schema({
     deadLine: Date,
     tripGuide: String,
     maximumNumPerTrip: Number,
-    idOfTourist: [String],
+    idOfTourist: [String],//sending by email from user
     discription: {
         type: Object
     },
     chatData: []
+
 })
 let userSchema = mongoose.Schema({
-    userName: String,
-    userMail: String,
+    userName:String,
+    userMail:{
+        type: String,
+        unique: true
+    },
     userPass: String,
     userNum: String,
-    trips: [String],
+    trips: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'trips',
+    }],
     userimage: String,
     newsLetter: Boolean,
     admin: Boolean
@@ -47,9 +54,11 @@ let userSchema = mongoose.Schema({
 
 
 
+// let RoomChat = mongoose.model("RoomChat", roomChatSchema);
 let trips = mongoose.model("tripsinfo", tripsSchema);
 let users = mongoose.model("userinfo", userSchema);
-//let payment = mongoose.model("paymentinfo", paymentSchema);
+// let payment = mongoose.model("paymentinfo", paymentSchema);
+
 
 // var test = new RoomChat({
 //     tripId: 1,
@@ -122,6 +131,8 @@ let paymentSchema = new Schema({
 let Payment = mongoose.model('Payment', paymentSchema);
 module.exports.Payment = Payment;
 module.exports.users = users
-//module.exports.payment = payment
+
+// module.exports.payment = payment
 module.exports.trips = trips
-//module.exports.RoomChat = RoomChat
+// module.exports.RoomChat = RoomChat
+
