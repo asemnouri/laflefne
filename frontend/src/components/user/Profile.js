@@ -58,7 +58,11 @@ class Profile extends React.Component {
       },
       body: JSON.stringify({ userid: localStorage.getItem("user-id") }),
     })
-    .then(data=>this.setState({tripArray:data.array}))
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data.trips)
+      this.setState({tripArray:data.trips})
+    })
     .catch(err=>console.log(err))
   }
 
@@ -160,6 +164,15 @@ class Profile extends React.Component {
 
                 <br></br>
                 where am i */}
+                  {/* this.state.tripArray.map(ele=>{
+                    return(
+                      <div>
+                      {console.log(ele)}
+
+                      </div>
+                    )
+                  }) */}
+                
                 <div>sssssssssssss</div>
               </div>
             </div>
