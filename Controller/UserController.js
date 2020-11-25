@@ -39,16 +39,17 @@ exports.signUpUser = async (req, res) => {
             newuser.userNum = req.body.userNum
             newuser.trips = []
             newuser.newsLetter = req.body.newsLetter,
-                newuser.admin = false
-            newuser.save((err, saveduse) => {
-                if (err) {
-                    console.log(err)
-                    return res.status(400).send('error')
-                }
-                var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
-                res.cookie('authToken', token).json({ userId: saveduse._id })
-                // return res.status(200).send('created')
-            })
+            newuser.admin = false,
+            newuser.master = false,
+                newuser.save((err, saveduse) => {
+                    if (err) {
+                        console.log(err)
+                        return res.status(400).send('error')
+                    }
+                    var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
+                    res.cookie('authToken', token).json({ userId: saveduse._id })
+                    // return res.status(200).send('created')
+                })
         }
         else
             return res.status(406).send('user existed')
@@ -94,7 +95,7 @@ exports.userlogout = (req, res) => {
 exports.checkuser = (req, res) => { return (req.user) }
 
 //get user info and display it to user profile
-exports.getuserinfo = (req, res) => {
+exports.getuserinfo = (req, res) => { 
     console.log("sdfghjkl;", req.body.id)
     UserModel.findOne({ _id: req.body.id }, (err, userData) => {
         if (err) {
@@ -109,8 +110,8 @@ exports.getuserinfo = (req, res) => {
             console.log("userrrrrrrrrrrrr", userData)
             return res.status(200).send(userData)
         }
-    })
-}
+    }) 
+}  
 
 exports.alldata = (req, res) => {
     UserModel.find()
@@ -139,10 +140,15 @@ exports.removeUser = (req, res) => {
 
 //make admin
 exports.makeadmin = (req, res) => {
-    let userEmail = req.body.userEmail
-    UserModel.findOne({ userMail: userEmail })
+    let id = req.body.id
+    UserModel.findOne({ _id: id })
         .then(user => {
+            console.log(user)
             user.updateOne({ admin: true })
+                .then(data => {
+                    console.log("data user", data)
+                    res.status(201).json({ success: true })
+                })
         })
         .catch(err => console.log(err))
 } 

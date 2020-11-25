@@ -43,7 +43,7 @@ let userSchema = mongoose.Schema({
     userNum: String,
     trips: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'trips',
+        ref: 'tripsinfo',
     }],
     userimage: String,
     newsLetter: Boolean,
