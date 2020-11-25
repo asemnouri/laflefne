@@ -47,7 +47,7 @@ exports.payment = (req, res) => {
                             .then(data => console.log(data))
                             .catch(err => console.log(err))
                     })
-                    
+
                     await trips.findOne({ _id: req.body.tripId }, (err, trip) => {
                         let res = trip.idOfTourist
                         res.push(req.body.userid)
