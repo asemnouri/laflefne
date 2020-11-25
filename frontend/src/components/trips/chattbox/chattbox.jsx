@@ -71,7 +71,7 @@ export default function ScrollDialog({ chatBoxData, componentDidM, name }) {
 
     return (
         <div>
-            <Button onClick={handleClickOpen("paper")}>Click to chat</Button>
+            <Button variant='contained' size="large" onClick={handleClickOpen("paper")}>Click to chat</Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
