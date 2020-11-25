@@ -16,6 +16,8 @@ import Profile from './components/user/Profile';
 import Navbar2 from './components/Homepage/Navbar-login';
 import ListOfUsers from "./components/user/listOfUsers/listOfUsers.jsx"
 import AddTrips from "./components/user/listOfTrips/addTrips.jsx"
+import Invitations from "./components/user/listOfInvitations/showInvitaions.jsx"
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -167,7 +169,7 @@ class App extends React.Component {
             } />
 
             <Route path="/user/invitations" exact render={() => {
-              // return <Invitations userid={this.state.userid} />
+              return <Invitations userid={this.state.userid} />
             }} />
           </Switch>
           <Footer />

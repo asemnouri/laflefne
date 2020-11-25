@@ -142,6 +142,11 @@ class AddTrips extends React.Component {
                     add a new trip
                   </button>
                 </Link>
+                <Link to="/user/invitations">
+                      <button>
+                        Invitations
+                  </button>
+                    </Link>
               </div>
             </div>
           </div>
