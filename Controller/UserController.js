@@ -46,7 +46,6 @@ exports.signUpUser = async (req, res) => {
                     return res.status(400).send('error')
                 }
                 var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
-
                 res.cookie('authToken', token).json({ userId: saveduse._id })
                 // return res.status(200).send('created')
             })
@@ -113,18 +112,37 @@ exports.getuserinfo = (req, res) => {
     })
 }
 
-
+exports.alldata = (req, res) => {
+    UserModel.find()
+        .then(data => {
+            console.log(data)
+            res.status(200).send(data)
+        }).catch(err => {
+            res.status(400).send('Err in users')
+        })
+}
 //remove user
 exports.removeUser = (req, res) => {
     //can put email 
+    console.log(req.body)
     UserModel.findOneAndRemove({ _id: req.body._id })
         .then((data) => {
             console.log('REMOVED:')
             console.log(data)
-            res.status(200).send('Removed')
+            res.status(200).json({ Removed: true })
         })
         .catch((err) => {
             console.log(err)
-            res.status(400).send('Err in removing')
+            res.status(400).json({ removed: false })
         })
 }
+
+//make admin
+exports.makeadmin = (req, res) => {
+    let userEmail = req.body.userEmail
+    UserModel.findOne({ userMail: userEmail })
+        .then(user => {
+            user.updateOne({ admin: true })
+        })
+        .catch(err => console.log(err))
+} 

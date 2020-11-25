@@ -12,6 +12,9 @@ routers.get('/checkuser', auth, (req, res) => {
 })
 routers.post('/getuserinfo', userController.getuserinfo)
 routers.post('/removeuser', userController.removeUser)
+routers.get('/alldata', userController.alldata)
+routers.get('/makeadmin', userController.makeadmin)
+
 //Payment Controller 
 const paymentController = require('./Controller/PaymentController')
 routers.post('/payment', paymentController.payment)
@@ -25,8 +28,9 @@ routers.get('/gettrips', tripController.tripsList)
 //routers.post('/addtrip', tripController.updateTrip)
 routers.get('/filldata', tripController.fillTrips)
 routers.post('/getmytrips', tripController.getmytrips)
-
 routers.post('/addTrip', tripController.addTrip)
+routers.post('/getusertrips', tripController.getusertrips)
+
 
 //Chat controller
 const chatRoomController = require('./Controller/chatRoomController')

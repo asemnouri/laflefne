@@ -43,6 +43,18 @@ class AddTrips extends React.Component {
         console.log(res)
       })
       .catch(err => console.log(err))
+
+    this.setState({
+      image: '',
+      tripType: '',
+      name: '',
+      price: '',
+      date: '',
+      deadLine: '',
+      tripGuide: '',
+      maximumNumPerTrip: '', //num
+      discription: "",
+    })
   }
 
   //display the user info and user trips
@@ -94,7 +106,7 @@ class AddTrips extends React.Component {
             <br></br>
             <div className='picContainer'>
               <img className="img1"
-                src={this.state.profileimg ||'https://i.imgur.com/ejGOOnV.jpg'}
+                src={this.state.profileimg || 'https://i.imgur.com/ejGOOnV.jpg'}
                 alt="userPic"
               />
             </div>
