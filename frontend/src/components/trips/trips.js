@@ -1,9 +1,9 @@
 import React from "react";
 import './trips.css';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Day from './days'
 import ScrollDialog from "./chattbox/chattbox.jsx"
-
+import StripeCheckoutButton from '../stripe/stripe-component'
 class Trip extends React.Component {
 
     constructor(props) {
@@ -17,11 +17,15 @@ class Trip extends React.Component {
             booked: false,
             whobookit: 0,
             maxnoPerTrip: 0,
-            chatBoxData: []
+            chatBoxData: [],
+            priceForStripe:0,
+            tripId:"",
+            idOfTourist:[]
         }
     }
     //to get the one trip data from db and display it
     componentDidMount = async () => {
+        console.log(">>>>>",this.props)
         await this.setState({
             thetrip: this.props.location.state.trip,
             whobookit: this.props.location.state.trip.idOfTourist.length,
@@ -39,7 +43,7 @@ class Trip extends React.Component {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                this.setState({ chatBoxData: data.chatData })
+                this.setState({ chatBoxData: data.chatData, tripId:data._id,priceForStripe:data.price,idOfTourist:data.idOfTourist})//also get trip id and price 
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -105,7 +109,22 @@ class Trip extends React.Component {
                     }
                     )}
                 </div>
-                <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
+                {/* user id from local storage */}
+                {/* user id -- price -- trip id */}
+                {/* put user id in trip */}
+                {/* put trip id in the user */}
+                    <div style={{textAlign: "center" }}>
+                {
+                    this.props.admin ||this.state.idOfTourist.includes(localStorage.getItem("user-id"))?
+                    
+                 <ScrollDialog  chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
+                :
+                <StripeCheckoutButton  componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId}/>
+                
+                }
+                    </div>
+                
+               
                 <br></br>
                 <div className="bookx">
                     <small id="nobook"></small>
