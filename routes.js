@@ -16,7 +16,7 @@ routers.post('/removeuser', userController.removeUser)
 routers.get('/alldata', userController.alldata)
 routers.post('/invite-req', userController.setInvitaion)
 routers.post('/makeadmin', userController.makeadmin)
- 
+routers.post('/user/invitation', userController.invitation)
 
 //Payment Controller 
 const paymentController = require('./Controller/PaymentController')

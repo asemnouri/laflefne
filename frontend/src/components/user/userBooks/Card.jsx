@@ -4,12 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import './Card.css';
-// import img from "./singapore.png";
-import RateReviewIcon from '@material-ui/icons/RateReview';
-import Rating from '@material-ui/lab/Rating';
-import Button from '@material-ui/core/Button';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -36,185 +31,75 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaControlCard({ removeGetRes,compDidmount, reserveShow, favoriteNotEmp, adults, dateDifferenceNumber, data, currentUser, hideRes, hideFav }) {
-    const classes = useStyles();
-    const theme = useTheme();
-  
-    const [favNotEmpty, setFav] = React.useState(favoriteNotEmp || false);
-    const [reservation, setReservation] = React.useState((removeGetRes || reserveShow || false));
-    return (
-        <Card className={classes.root} id="body" style={{borderRadius:"25px"}}>
-          <div className="first_img">
-            <div>
-            </div>
-          </div>
-          <div className="center">
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <div className = "first_Center">
-                  <Typography component="h5" variant="h5">
-                  Wadi Al-Qilt
-                    {/* {data.name} */}
-                  </Typography>
+export default function MediaControlCard({ trip, senderName, from_email }) {
+  const classes = useStyles();
+  const theme = useTheme();
+
+
+  return (
+    <Card className={classes.root} id={senderName?"body":"body1"} style={{ borderRadius: "25px" }}>
+{
+  senderName?
+  <div className="dollers" style={{display:"flex",justifyContent:"center",alignItems:"center"}} >
+            <Typography >
+              <div className="facility" >
+                <div>Invited By:</div>
+                <div>
+                  {senderName}
                 </div>
-                <div className="center-second">
-                  <Typography variant="subtitle1" color="textSecondary">
-                    <div className="citysize">
-                    tripType: One Day Trip
-                      {/* {data.address.locality}, {data.address.countryName} */}
-                      </div>
-                  </Typography>
-                </div>
-              </CardContent>
-              <div className="dollers" >
-                <Typography >
-                <div className="facility" >
-                <div>price : $19.99</div>
-                  <div>
-                  date: 2020-11-18
-                  </div>
-                  <div>deadLine:2020-11-17</div>
-                  </div>
-                 
-                </Typography>
+                <div>Email:</div>
+                <div>{from_email}</div>
               </div>
-            </div>
+
+            </Typography>
           </div>
-         
-        </Card>
-      );
-    }
+          :
+          <div> </div>
+}
 
+      <div className="first_img" style={{ backgroundImage: `url(${trip.image[0][0]})` }}>
+        <div>
+        </div>
+      </div>
+      {/* <div >
+          <img className="first_img"  src={trip.image[0][0]}/>
+          </div> */}
+      <div className="center">
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+            <div className="first_Center">
+              <Typography component="h5" variant="h5">
+                {trip.name}
+                {/* Wadi Al-Qilt */}
 
-    //
-       
-              /// oldone
+              </Typography>
+            </div>
+            <div className="center-second">
+              <Typography variant="subtitle1" color="textSecondary">
+                <div className="citysize">
 
-            //   export default function MediaControlCard({ removeGetRes,compDidmount, reserveShow, favoriteNotEmp, adults, dateDifferenceNumber, data, currentUser, hideRes, hideFav }) {
-            //     const classes = useStyles();
-            //     const theme = useTheme();
-              
-            //     const [favNotEmpty, setFav] = React.useState(favoriteNotEmp || false);
-            //     const [reservation, setReservation] = React.useState((removeGetRes || reserveShow || false));
-            //     return (
-            //         <Card className={classes.root} id="body" style={{borderRadius:"25px"}}>
-            //           <div className="first_img">
-            //             <div  >
-            //               {/* < img src={data.thumbnailUrl} className="img img_abs" style={{borderRadius:"15px"}}/> */}
-            //               {/* < img src={img} className="img img_abs" /> */}
-                
-            //               {/* {hideFav ?
-            //                 <div></div>
-            //                 :
-            //                 currentUser ?
-            //                   !(favNotEmpty || favoriteNotEmp) ?
-            //                     <FavoriteBorderIcon color="action" fontSize="large" className="icon" onClick={() => handleFavAdd(data, currentUser)} />
-            //                     :
-            //                     <FavoriteIcon color="error" fontSize="large" className="icon" onClick={() => handleFavRemove(data, currentUser)} />
-            //                   :
-            //                   <div></div>
-            //               } */}
-            //             </div>
-            //           </div>
-            //           <div className="center">
-            //             <div className={classes.details}>
-            //               <CardContent className={classes.content}>
-            //                 <div className = "first_Center">
-            //                   <Typography component="h5" variant="h5">
-            //                   Wadi Al-Qilt
-            //                     {/* {data.name} */}
-            //                   </Typography>
-            //                 </div>
-            //                 <div className="center-second">
-            //                   <Typography variant="subtitle1" color="textSecondary">
-            //                     <div className="citysize">
-            //                     tripType: One Day Trip
-            //                       {/* {data.address.locality}, {data.address.countryName} */}
-            //                       </div>
-            //                   </Typography>
-            //                 </div>
-            //               </CardContent>
-            //               <div className="dollers" >
-            //                 <Typography  >
-            //                 <div>$ 19.99</div>
-            //                   <div className="facility" >
-            //                   date: 2020-11-18
-            //                     {/* {data.address.streetAddress} */}
-            //                   </div>
-            //                   <div>deadLine:2020-11-17</div>
-            //                 </Typography>
-                            
-            //                 {/* ${priceConverter(data.ratePlan.price.current, adults, dateDifferenceNumber())} */}
-            //                 {/* {data.ratePlan.price.current} */}
-            //               </div>
-            //             </div>
-            //           </div>
-            //           {/* <div className={classes.controls}>
-            //               <IconButton aria-label="previous">
-            //                 {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-            //               </IconButton>
-            //               <IconButton aria-label="play/pause">
-            //                 <PlayArrowIcon className={classes.playIcon} />
-            //               </IconButton>
-            //               <IconButton aria-label="next">
-            //                 {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-            //               </IconButton>
-            //             </div> */}
-            //         </Card>
-            //       );
-            //     }
-            
-            // //          <div className='third_component'>
-                    
-            // {/* <div className="thirdcom_firstone">  discription :
-            // {/* <Rating name="half-rating-read" defaultValue={4} precision={0.5} readOnly /> */}
-            // {/* <Rating name="half-rating-read" defaultValue={data.starRating} precision={0.5} readOnly /> */}
-            
-            // // </div>
-            // // <div className="third_component_thirdline">
-            // // <div style={{jus}}>
-            // // <Button variant="contained" color="primary"  >
-            // //         reserve here
-            // // </Button>
-            // // </div>
-            
-            
-            // // </div>
-            // // </div> */}
-            
-            //     //
-            //             {/* <div style={{ padding: "6px" }}>
-            //                 <RateReviewIcon className='ratereview' />
-            //               </div>
-            //             </div>
-            //             <div className="third_component_secondline">
-            //               {
-            //                 currentUser ?
-            //                   reservation ?
-            //                     <Button variant="contained" color="primary" onClick={() => handleReserveRemove(data, currentUser)}>
-            //                       remove reservation
-            //               </Button>
-            //                     :
-            //                     <Button variant="contained" color="primary" onClick={() => handleReserveAdd(data, currentUser)}>
-            //                       reserve here
-            //               </Button>
-            //                   : <div></div>
-            //               } */}
+                  {/* tripType: One Day Trip */}
+                    tripType:{trip.tripType}
+                </div>
+              </Typography>
+            </div>
+          </CardContent>
+          <div className="dollers" >
+            <Typography >
+              <div className="facility" >
+                <div>price : {trip.price}</div>
+                <div>
+                  date: {trip.date.split("T")[0]}
+                </div>
+                <div>deadLine:{trip.deadLine.split("T")[0]}</div>
+              </div>
 
-            //                    {/* <div style={{ padding: "6px" }}>
-            //     <RateReviewIcon className='ratereview' />
-            //   </div>
-            // </div>
-            // <div className="third_component_secondline">
-            //   {
-            //     currentUser ?
-            //       reservation ?
-            //         <Button variant="contained" color="primary" onClick={() => handleReserveRemove(data, currentUser)}>
-            //           remove reservation
-            //   </Button>
-            //         :
-            //         <Button variant="contained" color="primary" onClick={() => handleReserveAdd(data, currentUser)}>
-            //           reserve here
-            //   </Button>
-            //       : <div></div>
-            //   } */}
+            </Typography>
+          </div>
+        </div>
+      </div>
+
+    </Card>
+  );
+}
+

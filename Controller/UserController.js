@@ -180,7 +180,8 @@ exports.setInvitaion = (req, res) => {
                 console.log('Key :', key)
                 console.log('val', obj[key])
             }
-            res.push(obj)
+            result.push(obj)
+            console.log("ddddddddddddddddddd",result)
             user.updateOne({ invitations: result })
                 .then(data => console.log(data))
                 .catch(err => console.log(err))
@@ -191,8 +192,9 @@ exports.setInvitaion = (req, res) => {
         })
 }
 
-exports.getInvitaion = (req, res) => {
-    //will recieve userid 
-    //response: full data of hit invita
-
+exports.invitation = (req, res) => {
+    let userid = req.body.userid
+     UserModel.findOne({ _id: userid }).populate("invitations.tripId")
+    .then(data=>res.status(201).json({invitations:data.invitations}))
 }
+   
