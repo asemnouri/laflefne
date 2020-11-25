@@ -20,7 +20,7 @@ class Invite extends React.Component {
         { console.log('from user name: ', this.props.userName) }
         console.log('To: ', this.state.email)
 
-        fetch('invite-req', {
+        fetch('/invite-req', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

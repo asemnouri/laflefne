@@ -144,7 +144,7 @@ class Profile extends React.Component {
                         add a new trip
                       </button>
                     </Link>
-                    <Link to="/invitations">
+                    <Link to="/user/invitations">
                       <button>
                         Invitations
                       </button>
@@ -173,15 +173,15 @@ class Profile extends React.Component {
               <div className="cards__wrapper">
                 <br></br>
                 <br></br>
-                {/* <div className="textContainer">
-                  <h4 className="text">Booked Trips</h4>
-                </div>
-
-                <br></br>
-                where am i */}
+              
 
                 <div>
-                  <MediaControlCard />
+                {
+                  this.state.tripArray.map((trip,i)=>{
+                    return <MediaControlCard trip={trip} key={i} />
+                  })
+                  
+                }
                 </div>
 
               </div>

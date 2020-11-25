@@ -31,52 +31,75 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaControlCard({ removeGetRes,compDidmount, reserveShow, favoriteNotEmp, adults, dateDifferenceNumber, data, currentUser, hideRes, hideFav }) {
-    const classes = useStyles();
-    const theme = useTheme();
-  
-    const [favNotEmpty, setFav] = React.useState(favoriteNotEmp || false);
-    const [reservation, setReservation] = React.useState((removeGetRes || reserveShow || false));
-    return (
-        <Card className={classes.root} id="body" style={{borderRadius:"25px"}}>
-          <div className="first_img">
-            <div>
-            </div>
-          </div>
-          <div className="center">
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <div className = "first_Center">
-                  <Typography component="h5" variant="h5">
-                  Wadi Al-Qilt
-                    {/* {data.name} */}
-                  </Typography>
+export default function MediaControlCard({ trip, senderName, from_email }) {
+  const classes = useStyles();
+  const theme = useTheme();
+
+
+  return (
+    <Card className={classes.root} id={senderName?"body":"body1"} style={{ borderRadius: "25px" }}>
+{
+  senderName?
+  <div className="dollers" style={{display:"flex",justifyContent:"center",alignItems:"center"}} >
+            <Typography >
+              <div className="facility" >
+                <div>Invited By:</div>
+                <div>
+                  {senderName}
                 </div>
-                <div className="center-second">
-                  <Typography variant="subtitle1" color="textSecondary">
-                    <div className="citysize">
-                    tripType: One Day Trip
-                      {/* {data.address.locality}, {data.address.countryName} */}
-                      </div>
-                  </Typography>
-                </div>
-              </CardContent>
-              <div className="dollers" >
-                <Typography >
-                <div className="facility" >
-                <div>price : $19.99</div>
-                  <div>
-                  date: 2020-11-18
-                  </div>
-                  <div>deadLine:2020-11-17</div>
-                  </div>
-                 
-                </Typography>
+                <div>Email:</div>
+                <div>{from_email}</div>
               </div>
-            </div>
+
+            </Typography>
           </div>
-         
-        </Card>
-      );
-    }
+          :
+          <div> </div>
+}
+
+      <div className="first_img" style={{ backgroundImage: `url(${trip.image[0][0]})` }}>
+        <div>
+        </div>
+      </div>
+      {/* <div >
+          <img className="first_img"  src={trip.image[0][0]}/>
+          </div> */}
+      <div className="center">
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+            <div className="first_Center">
+              <Typography component="h5" variant="h5">
+                {trip.name}
+                {/* Wadi Al-Qilt */}
+
+              </Typography>
+            </div>
+            <div className="center-second">
+              <Typography variant="subtitle1" color="textSecondary">
+                <div className="citysize">
+
+                  {/* tripType: One Day Trip */}
+                    tripType:{trip.tripType}
+                </div>
+              </Typography>
+            </div>
+          </CardContent>
+          <div className="dollers" >
+            <Typography >
+              <div className="facility" >
+                <div>price : {trip.price}</div>
+                <div>
+                  date: {trip.date.split("T")[0]}
+                </div>
+                <div>deadLine:{trip.deadLine.split("T")[0]}</div>
+              </div>
+
+            </Typography>
+          </div>
+        </div>
+      </div>
+
+    </Card>
+  );
+}
 
