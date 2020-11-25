@@ -79,7 +79,13 @@ exports.addTrip = (req, res) => {
     console.log('Here creating trip**************************//////////////////****************************')
     //must create chat room for the trip before saving to db
     var trip;
-    var image_ = req.body.data.image[0].split('-')
+    var image_ = req.body.data.image[0].split('||')
+    let innerArray=[]
+    image_.forEach(img=> innerArray.push(img.split("--")))
+    
+    var disc = req.body.data.discription[0].split('-');
+
+
     var disc = req.body.data.discription[0].split('-');
     var disc_obj = {}
     for (var i = 0; i < disc.length; i++) {
@@ -89,7 +95,13 @@ exports.addTrip = (req, res) => {
     result.push(image_)
     trip = new trips({
         image: result, //array
-        tripType: req.body.data.tripType[0],
+        _tripType: req.body.data.tripType[0],
+        get tripType() {
+            return this._tripType
+        },
+        set tripType(value) {
+            this._tripType = value
+        },
         name: req.body.data.name[0],
         price: req.body.data.price[0],
         date: req.body.data.date[0],
@@ -113,3 +125,18 @@ exports.addTrip = (req, res) => {
         })
 }
 
+exports.getusertrips = (req, res) => {
+    let userid = req.body.userid
+    UserModel.findOne({ _id: userid })
+        .then(async data => {
+            let tripIds = data.trips
+            let result = []
+            await tripIds.map(tripId => {
+                trips.findOne({ _id: tripId })
+                    .then(data => result.push(data))
+                    .catch(err => console.log(err))
+            })
+            res.status(201).json({array:result})
+        })
+        .catch(err=>res.status(404).send("errrrrrrr"))
+}

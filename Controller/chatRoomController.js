@@ -1,5 +1,5 @@
 const { trips } = require('../DataModel')
-
+const UserModel = require('../DataModel').users
 exports.getAllChat = (req, res) => {
     let name = req.body.name
     console.log("naaaaaaaaaame",name)
@@ -9,14 +9,16 @@ exports.getAllChat = (req, res) => {
 }
 
 //the chat room for each trip will be created with the trip add 
-exports.postMsg = (req, res) => {
+exports.postMsg = async (req, res) => {
     let name = req.body.name
     console.log(req.body.name)
     console.log(req.body.msg)
+    req.body.msg.img=""
+    await UserModel.findOne({userName:req.body.msg.name})
+    .then(data=>req.body.msg.img=data.userimage)
+    .catch(err=>console.log(err))
     trips.findOne({ name })
         .then(data => {
-            console.log(data)
-            console.log("asdasdasdasd",  req.body.msg)
             let obj = data.chatData
             obj.push(req.body.msg)
             console.log(obj)

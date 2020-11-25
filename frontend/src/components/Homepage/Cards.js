@@ -2,8 +2,6 @@ import React from 'react';
 import Carditem from './Carditem';
 import './A-Style.css'
 
-import StripeCheckoutButton from '../stripe/stripe-component'
-
 
 class Cards extends React.Component {
     constructor(props) {
@@ -20,7 +18,6 @@ class Cards extends React.Component {
         return (
             <div className='cards'>
                 <h1>Check Out Our Trips</h1>
-                <StripeCheckoutButton />
                 <div className='cards__container'>
                     <div className="cards__wrapper">
                         <ul className="cards__items">
