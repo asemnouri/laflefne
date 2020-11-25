@@ -25,6 +25,7 @@ class Trip extends React.Component {
     }
     //to get the one trip data from db and display it
     componentDidMount = async () => {
+        console.log(">>>>>",this.props)
         await this.setState({
             thetrip: this.props.location.state.trip,
             whobookit: this.props.location.state.trip.idOfTourist.length,
@@ -112,12 +113,16 @@ class Trip extends React.Component {
                 {/* user id -- price -- trip id */}
                 {/* put user id in trip */}
                 {/* put trip id in the user */}
+                    <div style={{textAlign: "center" }}>
                 {
-                 this.props.admin ||this.state.idOfTourist.includes(localStorage.getItem("user-id"))?
-                 <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
+                    this.props.admin ||this.state.idOfTourist.includes(localStorage.getItem("user-id"))?
+                    
+                 <ScrollDialog  chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
                 :
-                <StripeCheckoutButton componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId}/>
+                <StripeCheckoutButton  componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId}/>
+                
                 }
+                    </div>
                 
                
                 <br></br>

@@ -13,7 +13,8 @@ class Profile extends React.Component {
       useremail: '',
       mytrips: '',
       //defulat img for user
-      profileimg: 'https://i.imgur.com/ejGOOnV.jpg'
+      profileimg: 'https://i.imgur.com/ejGOOnV.jpg',
+      tripArray:[]
     }
   }
 
@@ -44,8 +45,21 @@ class Profile extends React.Component {
             console.log(err)
           }
         })
+
       }
     }
+    //fetch data of users trips  here
+    //send the user id from local storage as userid
+    //retrive all trip ids and send the trip to  the front end 
+    fetch('/getusertrips', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userid: localStorage.getItem("user-id") }),
+    })
+    .then(data=>this.setState({tripArray:data.array}))
+    .catch(err=>console.log(err))
   }
 
   render() {
@@ -109,7 +123,7 @@ class Profile extends React.Component {
 
                 {this.props.userid.admin ?
                   <div>
-                  <Link to="/user">
+                    <Link to="/user">
                       <button>
                         user books
                       </button>
@@ -124,7 +138,7 @@ class Profile extends React.Component {
                         add a new trip
                       </button>
                     </Link>
-                   
+
                   </div>
                   : <Link to="/user">
                     <button>
@@ -146,11 +160,7 @@ class Profile extends React.Component {
 
                 <br></br>
                 where am i */}
-                {
-                  this.props.userid.admin ?
-                    <addTrips />
-                    : <div></div>
-                }
+                <div>sssssssssssss</div>
               </div>
             </div>
           </div>

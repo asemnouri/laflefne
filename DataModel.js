@@ -34,7 +34,7 @@ let tripsSchema = mongoose.Schema({
 
 })
 let userSchema = mongoose.Schema({
-    userName:String,
+    userName:{type:String,unique: true},
     userMail:{
         type: String,
         unique: true
