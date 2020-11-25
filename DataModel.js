@@ -40,7 +40,10 @@ let userSchema = mongoose.Schema({
     userMail: String,
     userPass: String,
     userNum: String,
-    trips: [String],
+    trips: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'tripsinfo',
+    }],
     userimage: String,
     newsLetter: Boolean,
     admin: Boolean,

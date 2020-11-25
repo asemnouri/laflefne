@@ -121,16 +121,7 @@ exports.addTrip = (req, res) => {
 
 exports.getusertrips = (req, res) => {
     let userid = req.body.userid
-    UserModel.findOne({ _id: userid })
-        .then(async data => {
-            let tripIds = data.trips
-            let result = []
-            await tripIds.map(tripId => {
-                trips.findOne({ _id: tripId })
-                    .then(data => result.push(data))
-                    .catch(err => console.log(err))
-            })
-            res.status(201).json({ array: result })
-        })
-        .catch(err => res.status(404).send("errrrrrrr"))
+     UserModel.findOne({ _id: userid }).populate("trips")
+    .then(data=>res.send(data))
 }
+   
