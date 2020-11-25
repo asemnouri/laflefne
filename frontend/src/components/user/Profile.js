@@ -14,7 +14,7 @@ class Profile extends React.Component {
       mytrips: '',
       //defulat img for user
       profileimg: 'https://i.imgur.com/ejGOOnV.jpg',
-      tripArray:[]
+      tripArray: []
     }
   }
 
@@ -142,13 +142,26 @@ class Profile extends React.Component {
                         add a new trip
                       </button>
                     </Link>
-
-                  </div>
-                  : <Link to="/user">
-                    <button>
-                      user books
+                    <Link to="/invitations">
+                      <button>
+                        Invitations
                       </button>
-                  </Link>
+                    </Link>
+                  </div>
+
+                  :
+                  <div>
+                    <Link to="/user">
+                      <button>
+                        user books
+                      </button>
+                    </Link>
+                    <Link to="/user/invitations">
+                      <button>
+                        Invitations
+                  </button>
+                    </Link>
+                  </div>
                 }
               </div>
             </div>
