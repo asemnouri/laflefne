@@ -85,8 +85,10 @@ exports.addTrip = (req, res) => {
     for (var i = 0; i < disc.length; i++) {
         disc_obj[i] = disc[i]
     }
+    let result=[]
+    result.push(image_)
     trip = new trips({
-        image: image_, //array
+        image: result, //array
         tripType: req.body.data.tripType[0],
         name: req.body.data.name[0],
         price: req.body.data.price[0],
@@ -96,7 +98,8 @@ exports.addTrip = (req, res) => {
         maximumNumPerTrip: req.body.data.maximumNumPerTrip[0],
         idOfTourist: [], //array
         discription: disc_obj,
-        chatData: []
+        chatData: [],
+        explore:"Explore Palestine"
     })
     trip.save().then((trip) => {
         console.log("trip saved")
