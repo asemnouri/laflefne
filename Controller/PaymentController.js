@@ -39,17 +39,18 @@ exports.payment = (req, res) => {
                     objToRet = obj
                     //get the user and add the trip to his array
                     //get the trip and add the user to its idOfTourist
-                    let email = ""
                     await users.findOne({ _id: req.body.userid }, (err, user) => {
-                        let res = user.trips.push(req.body.tripId)
-                        email = user.email
+                        // console.log("user res",req.body.tripId)
+                        let res = user.trips
+                        res.push(req.body.tripId)
                         user.updateOne({ trips: res })
                             .then(data => console.log(data))
                             .catch(err => console.log(err))
                     })
                     
                     await trips.findOne({ _id: req.body.tripId }, (err, trip) => {
-                        let res = trip.idOfTourist.push(email)
+                        let res = trip.idOfTourist
+                        res.push(req.body.userid)
                         trip.updateOne({ idOfTourist: res })
                             .then(data => console.log(data))
                             .catch(err => console.log(err))
