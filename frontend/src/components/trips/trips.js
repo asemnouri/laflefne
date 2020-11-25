@@ -4,6 +4,8 @@ import './trips.css';
 import Day from './days'
 import ScrollDialog from "./chattbox/chattbox.jsx"
 import StripeCheckoutButton from '../stripe/stripe-component'
+import Invite from './Invitation-component';
+import { Button } from '@material-ui/core';
 class Trip extends React.Component {
 
     constructor(props) {
@@ -21,7 +23,10 @@ class Trip extends React.Component {
             priceForStripe: 0,
             tripId: "",
             idOfTourist: [],
-            admin: false
+            admin: false,
+            invite: false,
+            userMail: '',
+            userName: ''
         }
     }
     //to get the one trip data from db and display it
@@ -59,12 +64,22 @@ class Trip extends React.Component {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                this.setState({ admin:data.admin})//also get trip id and price 
+                this.setState({
+                    //userid: data._id,
+                    admin: data.admin,
+                    userName: data.userName,
+                    userMail: data.userMail
+                })//also get trip id and price 
+                console.log("******************************", data)
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
     }
+
+    // getInvitationBox = () => {
+    //     return <Invite sender={this.state.userid.name} />
+    // }
     render() {
         // var today = new Date();
         // let statedata = {}
@@ -144,11 +159,16 @@ class Trip extends React.Component {
                     }
                 </div>
 
+                <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} >Invite</Button>
+                {console.log('tripp id: ', this.state.tripId)}
+                {console.log('from email: ', this.state.userMail)}
+                {console.log('from user name: ', this.state.userName)}
 
-                <br></br>
-                <div className="bookx">
-                    <small id="nobook"></small>
-                </div>
+                {this.state.invite === true ?
+                    <Invite userid={localStorage.getItem("user-id")} tripId={this.state.tripId} userName={this.state.userName} from_email={this.state.userMail} /> :
+                    <div></div>
+                }
+
             </div>
         )
     }

@@ -14,7 +14,7 @@ class Profile extends React.Component {
       mytrips: '',
       //defulat img for user
       profileimg: 'https://i.imgur.com/ejGOOnV.jpg',
-      tripArray:[]
+      tripArray: []
     }
   }
 
@@ -58,8 +58,8 @@ class Profile extends React.Component {
       },
       body: JSON.stringify({ userid: localStorage.getItem("user-id") }),
     })
-    .then(data=>this.setState({tripArray:data.array}))
-    .catch(err=>console.log(err))
+      .then(data => this.setState({ tripArray: data.array }))
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -138,13 +138,26 @@ class Profile extends React.Component {
                         add a new trip
                       </button>
                     </Link>
-
-                  </div>
-                  : <Link to="/user">
-                    <button>
-                      user books
+                    <Link to="/invitations">
+                      <button>
+                        Invitations
                       </button>
-                  </Link>
+                    </Link>
+                  </div>
+
+                  :
+                  <div>
+                    <Link to="/user">
+                      <button>
+                        user books
+                      </button>
+                    </Link>
+                    <Link to="/user/invitations">
+                      <button>
+                        Invitations
+                  </button>
+                    </Link>
+                  </div>
                 }
               </div>
             </div>

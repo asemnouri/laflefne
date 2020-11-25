@@ -44,8 +44,15 @@ let userSchema = mongoose.Schema({
     userimage: String,
     newsLetter: Boolean,
     admin: Boolean,
-    master:Boolean,
-    invitations:[]
+    master: Boolean,
+    invitations: [{
+        // tripId: {
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: 'trips',
+        // },
+        // senderName: String,
+        // from_email: String
+    }]
 })
 
 
