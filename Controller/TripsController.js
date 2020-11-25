@@ -91,7 +91,7 @@ exports.addTrip = (req, res) => {
     for (var i = 0; i < disc.length; i++) {
         disc_obj[i] = disc[i]
     }
-    let result = []
+    let result=[]
     result.push(image_)
     trip = new trips({
         image: innerArray, //array
@@ -105,7 +105,7 @@ exports.addTrip = (req, res) => {
         idOfTourist: [], //array
         discription: disc_obj,
         chatData: [],
-        explore: "Explore Palestine"
+        explore:"Explore Palestine"
     })
     trip.save().then((trip) => {
         console.log("trip saved")
