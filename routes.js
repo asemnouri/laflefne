@@ -1,3 +1,4 @@
+
 const express = require('express');
 const routers = express.Router();
 const auth = require('./auth')
@@ -13,7 +14,9 @@ routers.get('/checkuser', auth, (req, res) => {
 routers.post('/getuserinfo', userController.getuserinfo)
 routers.post('/removeuser', userController.removeUser)
 routers.get('/alldata', userController.alldata)
+routers.post('/invite-req', userController.setInvitaion)
 routers.post('/makeadmin', userController.makeadmin)
+ 
 
 //Payment Controller 
 const paymentController = require('./Controller/PaymentController')
@@ -36,5 +39,6 @@ routers.post('/getusertrips', tripController.getusertrips)
 const chatRoomController = require('./Controller/chatRoomController')
 routers.post('/getchatRoom', chatRoomController.getAllChat)
 routers.post('/addchatRoom', chatRoomController.postMsg)
+
 
 module.exports = routers;

@@ -1,0 +1,111 @@
+.img {
+    /* border: 1px solid #ddd; */
+    border-radius: 4px;
+    padding: 5px;
+    width: 240px;
+    height: 140px;
+    overflow: hidden;
+    position: absolute;
+}
+
+#body {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ffffff60;
+    margin: 3rem;
+    /* margin-bottom: 15px; */
+    box-shadow: black;
+    width: 35vw;
+  
+}
+
+.first_img {
+    flex: .50;
+    background: url(https://www.almrsal.com/wp-content/uploads/2018/12/%D9%88%D8%A7%D8%AF%D9%8A-%D8%A7%D9%84%D9%82%D9%84%D8%B7.jpg);
+    background-repeat: no-repeat;
+    background-size: 250px 200px;
+    
+}
+
+.center {
+    flex: .50;
+    display: flex;
+    justify-content: center;
+    /* margin: 5px; */
+}
+.first_Center{
+padding-top:0px;
+}
+.center-second {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: .4rem;
+}
+
+.facility {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-size: 11px;
+    padding-left: 2.2rem;
+}
+
+.citysize {
+    font-size: 16px;
+}
+
+.third_component {
+    flex: .30;
+    /* margin: auto; */
+    float: right;
+    /* padding: 10px; */
+}
+
+.thirdcom_firstone {
+    display: flex;
+    flex: .5;
+    justify-content: center;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+/* 
+.icon {
+    position: relative;
+    padding-left: 8px;
+    padding-top: 8px;
+} */
+
+/* .third_component_secondline {
+    display: flex;
+    flex: .5;
+    justify-content: center;
+    padding: 1rem;
+    /* border: 1px solid; */
+/* } */ */
+
+.third_component_thirdline {
+    /* display: flex;
+    flex: .5; */
+    justify-content: center;
+    padding-bottom: 20px;
+    /* border: 1px solid; */
+}
+
+.dollers {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+
+.facility{
+    font-size:15px;
+     padding-right:.7rem
+     
+}
+/* .fav_rel{
+    position: relative;
+}
+.img_abs{
+    position: absolute;
+} */

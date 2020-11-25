@@ -4,6 +4,7 @@ const UserModel = require('../DataModel').users
 const bcrypt = require('bcryptjs')
 //JWT
 const jwt = require('jsonwebtoken');
+const { trips } = require('../DataModel');
 
 //sign up functionallity
 exports.signUpUser = async (req, res) => {
@@ -151,4 +152,47 @@ exports.makeadmin = (req, res) => {
                 })
         })
         .catch(err => console.log(err))
-} 
+}
+
+
+//send invitation -all setting
+exports.setInvitaion = (req, res) => {
+    //to_email, userid,from_email,tripId,userName
+    let to_email = req.body.to_email
+    let from_email = req.body.from_email
+    let tripId = req.body.tripId
+    let userName = req.body.userName
+
+    console.log('FROM Email: ', from_email)
+    console.log('To Email: ', to_email)
+    console.log('trip_id : ', tripId)
+    console.log('senderName', userName)
+    UserModel.findOne({ userMail: to_email })
+        .then(user => {
+            //now since there is user with this email, 
+            //get the trip info from db & push the invitation to his array
+
+            console.log('invitaions: ', user.invitations)
+
+            let result = user.invitations
+            var obj = { tripId: tripId, senderName: userName, from_email: from_email }
+            for (var key in obj) {
+                console.log('Key :', key)
+                console.log('val', obj[key])
+            }
+            res.push(obj)
+            user.updateOne({ invitations: result })
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+            res.status(200).json({ tripId: tripId, senderName: userName, from_email: from_email })
+        })
+        .catch((err) => {
+            res.status(404).send('No Users With Such Email')
+        })
+}
+
+exports.getInvitaion = (req, res) => {
+    //will recieve userid 
+    //response: full data of hit invita
+
+}
