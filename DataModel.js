@@ -43,7 +43,9 @@ let userSchema = mongoose.Schema({
     trips: [String],
     userimage: String,
     newsLetter: Boolean,
-    admin: Boolean
+    admin: Boolean,
+    master:Boolean,
+    invitations:[]
 })
 
 

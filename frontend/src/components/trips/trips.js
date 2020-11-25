@@ -18,21 +18,21 @@ class Trip extends React.Component {
             whobookit: 0,
             maxnoPerTrip: 0,
             chatBoxData: [],
-            priceForStripe:0,
-            tripId:"",
-            idOfTourist:[]
+            priceForStripe: 0,
+            tripId: "",
+            idOfTourist: [],
+            admin: false
         }
     }
     //to get the one trip data from db and display it
     componentDidMount = async () => {
-        console.log(">>>>>",this.props)
+        console.log(">>>>>", this.props)
         await this.setState({
             thetrip: this.props.location.state.trip,
             whobookit: this.props.location.state.trip.idOfTourist.length,
             maxnoPerTrip: this.props.location.state.trip.maximumNumPerTrip
         })
         document.documentElement.scrollTop = 0;
-        console.log("naaaaaaaaaaaaame", this.state.thetrip.name)
         fetch('/getchatRoom', {
             method: 'POST', // or 'PUT'
             headers: {
@@ -43,16 +43,32 @@ class Trip extends React.Component {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                this.setState({ chatBoxData: data.chatData, tripId:data._id,priceForStripe:data.price,idOfTourist:data.idOfTourist})//also get trip id and price 
+                this.setState({ chatBoxData: data.chatData, tripId: data._id, priceForStripe: data.price, idOfTourist: data.idOfTourist })//also get trip id and price 
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+        fetch('/getuserinfo', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: localStorage.getItem("user-id") }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                this.setState({ admin:data.admin})//also get trip id and price 
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
     }
     render() {
-        var today = new Date();
-        let statedata = {}
-        let pathname = '/trip'
+        // var today = new Date();
+        // let statedata = {}
+        // let pathname = '/trip'
         // if (this.props.location.state.userid && this.props.location.state.trip) {
         //     var ex = new Date(this.props.location.state.trip.deadLine)
         //     if (!this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid) && (this.state.maxnoPerTrip !== this.state.whobookit) && (ex.getTime() >= today.getTime())) {
@@ -117,18 +133,18 @@ class Trip extends React.Component {
                 {/* user id -- price -- trip id */}
                 {/* put user id in trip */}
                 {/* put trip id in the user */}
-                    <div style={{textAlign: "center" }}>
-                {
-                    this.props.admin ||this.state.idOfTourist.includes(localStorage.getItem("user-id"))?
-                    
-                 <ScrollDialog  chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
-                :
-                <StripeCheckoutButton  componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId}/>
-                
-                }
-                    </div>
-                
-               
+                <div style={{ textAlign: "center" }}>
+                    {
+                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
+
+                            <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
+                            :
+                            <StripeCheckoutButton componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId} />
+
+                    }
+                </div>
+
+
                 <br></br>
                 <div className="bookx">
                     <small id="nobook"></small>
