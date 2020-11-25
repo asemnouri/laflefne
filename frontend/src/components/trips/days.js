@@ -31,12 +31,6 @@ class Day extends React.Component {
                     <div className='inlinediv' style={{ 'width': '44%' }}>
                         <div >
                             <Slide  {...properties}>
-                                {console.log(this.props.imgs)}
-                                {/* {(Array.isArray(this.props.imgs[0]))?
-                            this.props.imgs=this.props.imgs[0]
-                            :
-                            this.props.imgs
-                            } */}
                                 {this.props.imgs.map((item, i) => { console.log("item", item); return <img className='tripimgs' src={item} key={i} alt='Date'></img> })}
                             </Slide>
                         </div>

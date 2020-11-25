@@ -127,10 +127,10 @@ class Trip extends React.Component {
                 </div>
                 <br></br>
                 <div>
-                    {console.log(Object.keys(this.state.thetrip.discription))}
+                    {/* {console.log(Object.keys(this.state.thetrip.discription))}
                     {Object.keys(this.state.thetrip.discription).map((value) => {
                         console.log(value)
-                    })}
+                    })} */}
                     {Object.keys(this.state.thetrip.discription).map((value) => {
                         let props = {
                             key: value,
@@ -159,15 +159,15 @@ class Trip extends React.Component {
                     }
                 </div>
 
-                <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} >Invite</Button>
+                {/* <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} >Invite</Button> */}
                 {console.log('tripp id: ', this.state.tripId)}
                 {console.log('from email: ', this.state.userMail)}
                 {console.log('from user name: ', this.state.userName)}
 
-                {this.state.invite === true ?
+                {/* {this.state.invite === true ?
                     <Invite userid={localStorage.getItem("user-id")} tripId={this.state.tripId} userName={this.state.userName} from_email={this.state.userMail} /> :
                     <div></div>
-                }
+                } */}
 
             </div>
         )
