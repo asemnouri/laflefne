@@ -34,8 +34,8 @@ let tripsSchema = mongoose.Schema({
 
 })
 let userSchema = mongoose.Schema({
-    userName:{type:String,unique: true},
-    userMail:{
+    userName: { type: String, unique: true },
+    userMail: {
         type: String,
         unique: true
     },
@@ -48,8 +48,8 @@ let userSchema = mongoose.Schema({
     userimage: String,
     newsLetter: Boolean,
     admin: Boolean,
-    master:Boolean,
-    invitations:[]
+    master: Boolean,
+    invitations: []
 })
 
 

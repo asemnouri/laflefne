@@ -1,7 +1,7 @@
 const express = require('express');
 const routers = express.Router();
 const auth = require('./auth')
- 
+
 //User Controller 
 const userController = require('./Controller/UserController')
 routers.post('/signup', userController.signUpUser);
@@ -14,7 +14,7 @@ routers.post('/getuserinfo', userController.getuserinfo)
 routers.post('/removeuser', userController.removeUser)
 routers.get('/alldata', userController.alldata)
 routers.post('/makeadmin', userController.makeadmin)
- 
+
 //Payment Controller 
 const paymentController = require('./Controller/PaymentController')
 routers.post('/payment', paymentController.payment)
