@@ -92,6 +92,10 @@ class Trip extends React.Component {
                 </div>
                 <br></br>
                 <div>
+                    {console.log(Object.keys(this.state.thetrip.discription))}
+                    {Object.keys(this.state.thetrip.discription).map((value) => {
+                        console.log(value)
+                    })}
                     {Object.keys(this.state.thetrip.discription).map((value) => {
                         let props = {
                             key: value,
