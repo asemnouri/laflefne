@@ -39,20 +39,20 @@ exports.signUpUser = async (req, res) => {
             newuser.userNum = req.body.userNum
             newuser.trips = []
             newuser.newsLetter = req.body.newsLetter,
-            newuser.admin=false
+                newuser.admin = false
             newuser.save((err, saveduse) => {
                 if (err) {
                     console.log(err)
                     return res.status(400).send('error')
                 }
                 var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
-                res.cookie('authToken', token).json({userId:saveduse._id})
+                res.cookie('authToken', token).json({ userId: saveduse._id })
                 // return res.status(200).send('created')
             })
         }
         else
             return res.status(406).send('user existed')
-    }) 
+    })
 }
 
 //loging in 
@@ -78,7 +78,7 @@ exports.loginUser = (req, res) => {
             else {
                 var token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
                 res.cookie('authToken', token)
-                return res.status(200).json({token,userId:user._id})
+                return res.status(200).json({ token, userId: user._id })
             }
         }
     })
@@ -86,7 +86,7 @@ exports.loginUser = (req, res) => {
 
 //logout to remove token (token value = empty)
 exports.userlogout = (req, res) => {
-    res.cookie('authToken', '',{maxAge:1})
+    res.cookie('authToken', '', { maxAge: 1 })
     res.status(200).send(req.user)
 }
 
@@ -95,7 +95,7 @@ exports.checkuser = (req, res) => { return (req.user) }
 
 //get user info and display it to user profile
 exports.getuserinfo = (req, res) => {
-    console.log("sdfghjkl;",req.body.id)
+    console.log("sdfghjkl;", req.body.id)
     UserModel.findOne({ _id: req.body.id }, (err, userData) => {
         if (err) {
             console.log(err)
@@ -106,20 +106,20 @@ exports.getuserinfo = (req, res) => {
             return res.status(404).send('not found user')
         }
         else {
-            console.log("userrrrrrrrrrrrr",userData)
+            console.log("userrrrrrrrrrrrr", userData)
             return res.status(200).send(userData)
         }
     })
 }
 
-exports.alldata = (req,res) =>{
+exports.alldata = (req, res) => {
     UserModel.find()
-    .then(data=>{
-        console.log(data)
-        res.status(200).send(data)
-    }).catch(err=>{
-        res.status(400).send('Err in users') 
-    })   
+        .then(data => {
+            console.log(data)
+            res.status(200).send(data)
+        }).catch(err => {
+            res.status(400).send('Err in users')
+        })
 }
 //remove user
 exports.removeUser = (req, res) => {
@@ -129,10 +129,20 @@ exports.removeUser = (req, res) => {
         .then((data) => {
             console.log('REMOVED:')
             console.log(data)
-            res.status(200).json({Removed:true})
+            res.status(200).json({ Removed: true })
         })
         .catch((err) => {
             console.log(err)
-            res.status(400).json({removed:false})
+            res.status(400).json({ removed: false })
         })
 }
+
+//make admin
+exports.makeadmin = (req, res) => {
+    let userEmail = req.body.userEmail
+    UserModel.findOne({ userMail: userEmail })
+        .then(user => {
+            user.updateOne({ admin: true })
+        })
+        .catch(err => console.log(err))
+} 
