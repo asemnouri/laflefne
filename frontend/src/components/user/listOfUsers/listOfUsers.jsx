@@ -15,7 +15,8 @@ class ListOfUsers extends React.Component {
       arrayofuser: [],
       _id: '',
       //defulat img for user
-      profileimg: 'https://i.imgur.com/ejGOOnV.jpg'
+      profileimg: 'https://i.imgur.com/ejGOOnV.jpg',
+      master: ""
     }
   }
 
@@ -26,7 +27,7 @@ class ListOfUsers extends React.Component {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ _id:id })
+      body: JSON.stringify({ _id: id })
     };
     fetch('/removeuser', requestOptions)
       .then(response => response.json())
@@ -45,8 +46,46 @@ class ListOfUsers extends React.Component {
 
   }
 
+  handleAdminClick = (id) => {
+    console.log(">>>>");
+    fetch('/makeadmin', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: id }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        this.componentDidMount()
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
 
   componentDidMount() {
+
+    fetch('/getuserinfo', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: localStorage.getItem("user-id") }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        this.setState({ master: data.master })
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+
+
+
     document.documentElement.scrollTop = 0;
     console.log(this.props.userid)
     if (this.props.userid.userimage) {
@@ -128,21 +167,12 @@ class ListOfUsers extends React.Component {
             </div>
           </div>
           <div className="col left" id="column">
-            {/* <div className='cards__container' id="cards__container1">
-              <div className="cards__wrapper">
-                <br></br>
-              </div>
-            <div> zxvxvxcv </div>
-            </div>   */}
-
             <div style={{ display: "flex", marginTop: "5rem", justifyContent: "center", height: "50vh", }}>
-              {/* <div style={{ flex: ".20" }}></div> */}
               <div style={{ backgroundColor: "#ffffff70", flex: ".20", textAlign: "center" }}>
                 <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
                   UserName
                      </div>
                 {this.state.arrayofuser.map((user) => {
-                  console.log('zz', user)
                   return <div style={{ marginTop: "1rem" }}><p>{user.userName} </p>
                   </div>
                 })}
@@ -162,7 +192,16 @@ class ListOfUsers extends React.Component {
                 </div>
                 {
                   this.state.arrayofuser.map((user) => {
-                    return <div><Button variant="outlined" style={{ marginTop: ".4rem" }} >AddAdmin</Button> </div>
+                    return (<div>
+                      {
+                        (user.master === true) ?
+                          <Button disabled variant="outlined" style={{ marginTop: ".4rem", paddingLeft: "30px", paddingRight: "30px" }} >Master</Button>
+                          : (user.admin === true) ?
+                            <Button disabled variant="outlined" style={{ marginTop: ".4rem", paddingLeft: "33px", paddingRight: "33px" }} >Admin</Button>
+                            : <Button onClick={() => this.handleAdminClick(user._id)} variant="outlined" style={{ marginTop: ".4rem" }} >MakeAdmin</Button>
+                      }
+                    </div>)
+
                   })
                 }
               </div>
@@ -170,10 +209,30 @@ class ListOfUsers extends React.Component {
                 <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
                   remove User
               </div>
+              {console.log("ssssssssssssssss",this.state.master)}
                 {
-                  this.state.arrayofuser.map((user) => {
-                    return <div><Button variant="outlined" style={{ marginTop: ".4rem" }} onClick={() => this.handelremove(user._id)}>removeUser</Button> </div>
-                  })
+                  
+                  this.state.master ?
+                    this.state.arrayofuser.map((user) => {
+                      return (<div>{
+                        (user._id === localStorage.getItem("user-id")) ?
+                          <Button variant="outlined" style={{ marginTop: ".4rem" }} disabled onClick={() => this.handelremove(user._id)}>removeUser</Button>
+                         : <Button variant="outlined" style={{ marginTop: ".4rem" }} onClick={() => this.handelremove(user._id)}>removeUser</Button>
+                      }
+                      </div>)
+                    })
+
+                    :
+                    this.state.arrayofuser.map((user) => {
+                      return (<div>{
+                        (user.master || user._id === localStorage.getItem("user-id")) ?
+                          <Button variant="outlined" style={{ marginTop: ".4rem" }} disabled onClick={() => this.handelremove(user._id)}>removeUser</Button>
+                          : user.admin ?
+                            <Button variant="outlined" style={{ marginTop: ".4rem" }} disabled>removeUser</Button>
+                            : <Button variant="outlined" style={{ marginTop: ".4rem" }} onClick={() => this.handelremove(user._id)}>removeUser</Button>
+                      }
+                      </div>)
+                    })
                 }
 
               </div>
