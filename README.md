@@ -1,11 +1,11 @@
 # Project Name : LafLefne 
 
-## Team
-  - Deema AbuZahra
-  - Emad Aqel
-  - Noor Aldeen Ashqer 
-  - Qamar Jaradat
-  - Razan Abusamra
+## Legacy Team
+  - Asem Nouri
+  - Meena Fogha
+  - Huthaifa dof
+  - Ameed Asmah
+  - Dima Jabr
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
 1. [Picture Documentation](#documentation)
-
+1. [Features](#features)
 ## About
 Laflefne is local(Palestine) tour booking and viewing website.
 
@@ -43,7 +43,7 @@ cd frontend/
 npm install
 ```
 ```
-npm run build
+npm start
 ```
 2. Open terminal 2: From within the root directory:
 ```
@@ -54,7 +54,55 @@ npm start
 ```
 open your localhost:4000
 
-### Picture Documentation
+## Picture Documentation
 ![Home Page](https://i.imgur.com/T6WHKg9.png)
 
 
+## Features
+-The new added features
+
+```
+User Profile
+```
+
+ ### normal-user-profile & functions:
+
+ * View Invitations
+![Invitationsa](./readmeImg/invitaion.PNG)
+ * View Booked Trips
+![Invitationsa](./readmeImg/user.PNG)
+
+ ### Admin-profile & functions:
+ 
+ * Add new trip
+![Admin Profile-addTrip](./readmeImg/adminprofile.PNG)
+ * Make-Admin - Remove-User
+![Admin Profile-Control Users](./readmeImg/Admin-usersButton)
+
+ ### Master-user-profile
+ * All-Functions + Remove Admin Users
+![Master Profile](./readmeImg/Master.PNG)
+
+Common Functionalities: 
+
+View Invitations
+![Invitations](./readmeImg/invitaion.PNG)
+View Booked Trips
+![Invitationsa](./readmeImg/user.PNG)
+
+
+```
+Trip Page
+```
+ ### Chat Box 
+ ![ChatBox](./readmeImg/ChatBox.PNG)
+
+ ```
+Buy Trip
+```
+![Buy Trip](./readmeImg/buy.PNG)
+
+ ```
+Invite Friend
+```
+![Invite Friend](./readmeImg/Invite.PNG)
