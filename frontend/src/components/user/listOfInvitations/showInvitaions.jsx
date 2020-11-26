@@ -1,12 +1,11 @@
 import React from "react";
-import './Profile.css';
-import Carditem from './UserCarditem';
+import '../Profile.css';
+import Carditem from '../userBooks/Card';
 import $ from 'jquery'
 import { Link } from "react-router-dom"
-import addTrips from "./listOfTrips/addTrips";
-import Card from "./userBooks/Card";
-import MediaControlCard from "./userBooks/Card";
-class Profile extends React.Component {
+import MediaControlCard from "../userBooks/Card";
+import BarButton from "../listOfTrips/BarButton";
+class Invitations extends React.Component {
 
   constructor(props) {
     super(props)
@@ -53,7 +52,7 @@ class Profile extends React.Component {
     //fetch data of users trips  here
     //send the user id from local storage as userid
     //retrive all trip ids and send the trip to  the front end 
-    fetch('/getusertrips', {
+    fetch('/user/invitation', {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
@@ -62,8 +61,8 @@ class Profile extends React.Component {
     })
     .then(res=>res.json())
     .then(data=>{
-      console.log(data.trips)
-      this.setState({tripArray:data.trips})
+      console.log(data.invitations)
+      this.setState({tripArray:data.invitations})
     })
     .catch(err=>console.log(err))
   }
@@ -144,7 +143,7 @@ class Profile extends React.Component {
                         add a new trip
                       </button>
                     </Link>
-                    <Link to="/user/invitations">
+                    <Link to="/invitations">
                       <button>
                         Invitations
                       </button>
@@ -165,12 +164,18 @@ class Profile extends React.Component {
                     </Link>
                   </div>
                 }
+                
               </div>
             </div>
           </div>
           <div className="col left" id="column">
-            <div className='cards__container' id="cards__container1">
-              <div className="cards__wrapper">
+          <div>
+              <BarButton />
+              </div>
+            <div className='cards__container' id="cards__container1" style={{overflowY:"scroll" , height :"45vw"}}>
+            
+              <div className="cards__wrapper" style={{paddingTop:"0px"}}>
+             
                 <br></br>
                 <br></br>
               
@@ -178,7 +183,7 @@ class Profile extends React.Component {
                 <div>
                 {
                   this.state.tripArray.map((trip,i)=>{
-                    return <MediaControlCard trip={trip} key={i} />
+                    return <MediaControlCard trip={trip.tripId} from_email={trip.from_email} senderName={trip.senderName} key={i} />
                   })
                   
                 }
@@ -193,4 +198,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+export default Invitations;

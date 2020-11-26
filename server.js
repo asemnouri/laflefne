@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
 app.use('/', routers)
 module.exports = app;
 
+//connecting to the local bakend server
 
 var port = 4000; //process.env.PORT ||
 

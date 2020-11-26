@@ -16,11 +16,13 @@ import Profile from './components/user/Profile';
 import Navbar2 from './components/Homepage/Navbar-login';
 import ListOfUsers from "./components/user/listOfUsers/listOfUsers.jsx"
 import AddTrips from "./components/user/listOfTrips/addTrips.jsx"
+import Invitations from "./components/user/listOfInvitations/showInvitaions.jsx"
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      islogin: true, 
+      islogin: true,
       isuser: false,
       tokenin: "",
       testtrips: [],
@@ -130,14 +132,14 @@ class App extends React.Component {
         <Router>
           {nav}
           <Switch>
-            {comp} 
+            {comp}
             <Route
               path="/"
               exact render={(props) => <Home userid={this.state.userid} testtrips={this.state.testtrips} trip={this.state.thetrip} />}
             />
             <Route
               path="/trips"
-              render={(props) => <Trips admin ={this.state.userid.admin} userid={this.state.userid} testtrips={this.state.testtrips} trip={this.state.thetrip} />}
+              render={(props) => <Trips admin={this.state.userid.admin} userid={this.state.userid} testtrips={this.state.testtrips} trip={this.state.thetrip} />}
             />
             <Route path="/sign-up" exact component={Signup} />
             <Route path="/sign-in" exact component={Login} />
@@ -165,6 +167,10 @@ class App extends React.Component {
               }
             }
             } />
+
+            <Route path="/user/invitations" exact render={() => {
+              return <Invitations userid={this.state.userid} />
+            }} />
           </Switch>
           <Footer />
         </Router>
