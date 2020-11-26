@@ -132,17 +132,18 @@ class Trip extends React.Component {
                         <p>Start Chat</p>
                     </div>
                     <div>
-                        <img className='imgs' src='https://img.icons8.com/fluent/2x/add-user-group-man-man.png' alt='invite'></img>
+                        
+                        <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} ><img className='imgs' src='https://img.icons8.com/fluent/2x/add-user-group-man-man.png' alt='invite'></img></Button>
                         <p>Invite friend</p>
                     </div>
 
                 </div>
+                {this.state.invite === true ?
+                    <Invite userid={localStorage.getItem("user-id")} invite={this.setinvitation} tripId={this.state.tripId} userName={this.state.userName} from_email={this.state.userMail} /> :
+                    <div></div>
+                }
                 <br></br>
                 <div>
-                    {/* {console.log(Object.keys(this.state.thetrip.discription))}
-                    {Object.keys(this.state.thetrip.discription).map((value) => {
-                        console.log(value)
-                    })} */}
                     {Object.keys(this.state.thetrip.discription).map((value) => {
                         let props = {
                             key: value,
@@ -171,15 +172,12 @@ class Trip extends React.Component {
                     }
                 </div>
 
-                <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} >Invite</Button>
+                
                 {console.log('tripp id: ', this.state.tripId)}
                 {console.log('from email: ', this.state.userMail)}
                 {console.log('from user name: ', this.state.userName)}
 
-                {this.state.invite === true ?
-                    <Invite userid={localStorage.getItem("user-id")} invite={this.setinvitation} tripId={this.state.tripId} userName={this.state.userName} from_email={this.state.userMail} /> :
-                    <div></div>
-                }
+                
 
             </div>
         )
