@@ -105,4 +105,4 @@ Buy Trip
  ```
 Invite Friend
 ```
-![Invite Friend](./readmeImg/invite.PNG)
+![Invite Friend](./readmeImg/Invite.PNG)

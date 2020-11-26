@@ -9,8 +9,10 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 // import Carditem from './UserCarditem';
+import BarButton from "./BarButton";
 import $ from 'jquery'
 import { Link } from "react-router-dom"
+import BarButton from "./BarButton";
 class AddTrips extends React.Component {
 
   constructor(props) {
@@ -104,6 +106,7 @@ class AddTrips extends React.Component {
             <br></br>
             <br></br>
             <br></br>
+           
             <div className='picContainer'>
               <img className="img1"
                 src={this.state.profileimg || 'https://i.imgur.com/ejGOOnV.jpg'}
@@ -152,6 +155,9 @@ class AddTrips extends React.Component {
           </div>
           <div className="col left" id="column">
             <div className='cards__container' id="cards__container1">
+            <div>
+              <BarButton />
+            </div>
               <div className="cards__wrapper">
                 <FormControl fullWidth className='classes.margin' variant="outlined" style={{ width: '600px', paddingBottom: '20px' }}>
                   <InputLabel htmlFor="outlined-adornment-amount">Images</InputLabel>
