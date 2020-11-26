@@ -12,6 +12,7 @@ import { Button } from '@material-ui/core';
 import BarButton from "./BarButton";
 import $ from 'jquery'
 import { Link } from "react-router-dom"
+import BarButton from "./BarButton";
 class AddTrips extends React.Component {
 
   constructor(props) {
@@ -105,6 +106,7 @@ class AddTrips extends React.Component {
             <br></br>
             <br></br>
             <br></br>
+           
             <div className='picContainer'>
               <img className="img1"
                 src={this.state.profileimg || 'https://i.imgur.com/ejGOOnV.jpg'}

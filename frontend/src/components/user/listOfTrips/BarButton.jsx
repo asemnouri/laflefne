@@ -2,7 +2,11 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
+
 import {Link } from "react-router-dom"
+
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,6 +44,7 @@ export default function BarButton() {
 
                     <Button>Add new Trip</Button>
                     </Link>
+
                     </div>
                 </div>
                   
@@ -48,4 +53,6 @@ export default function BarButton() {
                
         </div>
     )
+
 }
+
