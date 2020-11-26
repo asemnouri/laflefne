@@ -75,6 +75,9 @@ class Trip extends React.Component {
             .catch((error) => {
                 console.error('Error:', error);
             });
+    } 
+    setinvitation=()=>{
+        this.setState({invite:false})
     }
 
     // getInvitationBox = () => {
@@ -165,7 +168,7 @@ class Trip extends React.Component {
                 {console.log('from user name: ', this.state.userName)}
 
                 {this.state.invite === true ?
-                    <Invite userid={localStorage.getItem("user-id")} tripId={this.state.tripId} userName={this.state.userName} from_email={this.state.userMail} /> :
+                    <Invite userid={localStorage.getItem("user-id")} invite={this.setinvitation} tripId={this.state.tripId} userName={this.state.userName} from_email={this.state.userMail} /> :
                     <div></div>
                 }
 
