@@ -75,9 +75,9 @@ class Trip extends React.Component {
             .catch((error) => {
                 console.error('Error:', error);
             });
-    } 
-    setinvitation=()=>{
-        this.setState({invite:false})
+    }
+    setinvitation = () => {
+        this.setState({ invite: false })
     }
 
     // getInvitationBox = () => {
@@ -132,7 +132,7 @@ class Trip extends React.Component {
                         <p>Start Chat</p>
                     </div>
                     <div>
-                        
+
                         <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} ><img className='imgs' src='https://img.icons8.com/fluent/2x/add-user-group-man-man.png' alt='invite'></img></Button>
                         <p>Invite friend</p>
                     </div>
@@ -162,22 +162,23 @@ class Trip extends React.Component {
                 {/* put user id in trip */}
                 {/* put trip id in the user */}
                 <div style={{ textAlign: "center" }}>
-                    {
+                    {localStorage.getItem("user-id") ?
                         this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
 
                             <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
                             :
                             <StripeCheckoutButton componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId} />
+                        : <div></div>
 
                     }
                 </div>
 
-                
+
                 {console.log('tripp id: ', this.state.tripId)}
                 {console.log('from email: ', this.state.userMail)}
                 {console.log('from user name: ', this.state.userName)}
 
-                
+
 
             </div>
         )
