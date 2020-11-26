@@ -127,6 +127,15 @@ class Trip extends React.Component {
                         <img className='imgs' src='https://www.flaticon.com/svg/static/icons/svg/3409/3409565.svg' alt='tripGuide'></img>
                         <p>{this.state.thetrip.tripGuide}</p>
                     </div>
+                    <div>
+                        <img className='imgs' src='https://img.icons8.com/cute-clipart/2x/chat.png' alt='chat'></img>
+                        <p>Start Chat</p>
+                    </div>
+                    <div>
+                        <img className='imgs' src='https://img.icons8.com/fluent/2x/add-user-group-man-man.png' alt='invite'></img>
+                        <p>Invite friend</p>
+                    </div>
+
                 </div>
                 <br></br>
                 <div>

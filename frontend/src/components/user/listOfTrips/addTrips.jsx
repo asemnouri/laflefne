@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 // import Carditem from './UserCarditem';
-import BarButton from "./BarButton";
+// import BarButton from "./BarButton";
 import $ from 'jquery'
 import { Link } from "react-router-dom"
 class AddTrips extends React.Component {
@@ -112,8 +112,6 @@ class AddTrips extends React.Component {
               />
             </div>
             <br></br>
-            <br></br>
-            <br></br>
             <div className='textContainer' >
               <div>
                 <h4 className="text">Name</h4>
@@ -128,23 +126,24 @@ class AddTrips extends React.Component {
                 <h6 className="text1">{this.props.userid.userNum}</h6>
               </div>
               <div>
+              <br></br>
                 <Link to="/user">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     user books
                  </button>
                 </Link>
                 <Link to="/user/users">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     users
                  </button>
                 </Link>
                 <Link to="/user/addtrip">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     add a new trip
                   </button>
                 </Link>
                 <Link to="/user/invitations">
-                      <button>
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         Invitations
                   </button>
                     </Link>
@@ -153,9 +152,9 @@ class AddTrips extends React.Component {
           </div>
           <div className="col left" id="column">
             <div className='cards__container' id="cards__container1">
-            <div>
+            {/* <div>
               <BarButton />
-            </div>
+            </div> */}
               <div className="cards__wrapper">
                 <FormControl fullWidth className='classes.margin' variant="outlined" style={{ width: '600px', paddingBottom: '20px' }}>
                   <InputLabel htmlFor="outlined-adornment-amount">Images</InputLabel>
@@ -297,7 +296,7 @@ class AddTrips extends React.Component {
             </div>
           </div>
         </div>
-      </div >
+      </div>
     )
   }
 }

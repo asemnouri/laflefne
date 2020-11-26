@@ -5,7 +5,7 @@ import $ from 'jquery'
 import { Link } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import BarButton from "../listOfTrips/BarButton"
+// import BarButton from "../listOfTrips/BarButton"
 class ListOfUsers extends React.Component {
   constructor(props) {
     super(props)
@@ -133,8 +133,6 @@ class ListOfUsers extends React.Component {
               />
             </div>
             <br></br>
-            <br></br>
-            <br></br>
             <div className='textContainer' >
               <div>
                 <h4 className="text">Name</h4>
@@ -149,23 +147,24 @@ class ListOfUsers extends React.Component {
                 <h6 className="text1">{this.props.userid.userNum}</h6>
               </div>
               <div>
+              <br></br>
                 <Link to="/user">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     user books
                  </button>
                 </Link>
                 <Link to="/user/users">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     users
                  </button>
                 </Link>
                 <Link to="/user/addtrip">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     add a new trip
                   </button>
                 </Link>
                 <Link to="/user/invitations">
-                      <button>
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         Invitations
                   </button>
                     </Link>
@@ -173,9 +172,9 @@ class ListOfUsers extends React.Component {
             </div>
           </div>
           <div className="col left" id="column">
-            <div>
+            {/* <div>
               <BarButton />
-            </div>
+            </div> */}
             <div style={{ display: "flex", marginTop: "5rem", justifyContent: "center", height: "50vh", }}>
               <div style={{ backgroundColor: "#ffffff70", flex: ".20", textAlign: "center" }}>
                 <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
