@@ -40,8 +40,8 @@ exports.signUpUser = async (req, res) => {
             newuser.userNum = req.body.userNum
             newuser.trips = []
             newuser.newsLetter = req.body.newsLetter,
-            newuser.admin = false,
-            newuser.master = false,
+                newuser.admin = false,
+                newuser.master = false,
                 newuser.save((err, saveduse) => {
                     if (err) {
                         console.log(err)
@@ -96,7 +96,7 @@ exports.userlogout = (req, res) => {
 exports.checkuser = (req, res) => { return (req.user) }
 
 //get user info and display it to user profile
-exports.getuserinfo = (req, res) => { 
+exports.getuserinfo = (req, res) => {
     console.log("sdfghjkl;", req.body.id)
     UserModel.findOne({ _id: req.body.id }, (err, userData) => {
         if (err) {
@@ -111,8 +111,8 @@ exports.getuserinfo = (req, res) => {
             console.log("userrrrrrrrrrrrr", userData)
             return res.status(200).send(userData)
         }
-    }) 
-}  
+    })
+}
 
 exports.alldata = (req, res) => {
     UserModel.find()
@@ -181,7 +181,7 @@ exports.setInvitaion = (req, res) => {
                 console.log('val', obj[key])
             }
             result.push(obj)
-            console.log("ddddddddddddddddddd",result)
+            console.log("ddddddddddddddddddd", result)
             user.updateOne({ invitations: result })
                 .then(data => console.log(data))
                 .catch(err => console.log(err))
@@ -194,7 +194,11 @@ exports.setInvitaion = (req, res) => {
 
 exports.invitation = (req, res) => {
     let userid = req.body.userid
-     UserModel.findOne({ _id: userid }).populate("invitations.tripId")
-    .then(data=>res.status(201).json({invitations:data.invitations}))
+    UserModel.findOne({ _id: userid }).populate("invitations.tripId")
+        .then(data => res.status(201).json({ invitations: data.invitations }))
 }
-   
+
+/*
+https://www.mahmiyat.ps/uploads/uploads/4a992a20bf69d7256c9d7ccd6a384907.jpg
+
+*/
