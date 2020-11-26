@@ -5,6 +5,7 @@ import $ from 'jquery'
 import { Link } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import BarButton from "../listOfTrips/BarButton";
 class ListOfUsers extends React.Component {
   constructor(props) {
     super(props)
@@ -172,7 +173,19 @@ class ListOfUsers extends React.Component {
             </div>
           </div>
           <div className="col left" id="column">
-            <div style={{ display: "flex", marginTop: "5rem", justifyContent: "center", height: "50vh", }}>
+            {/* <div className='cards__container' id="cards__container1">
+              <div className="cards__wrapper">
+                <br></br>
+              </div>
+            <div> zxvxvxcv </div>
+            </div>   */}
+           
+            <div> 
+            <BarButton />
+            </div>
+            <div style={{ display: "flex", marginTop: "5rem",paddingRight:"8rem",marginRight:"1.3rem", justifyContent: "center", height: "50vh", }}>
+            
+              {/* <div style={{ flex: ".20" }}></div> */}
               <div style={{ backgroundColor: "#ffffff70", flex: ".20", textAlign: "center" }}>
                 <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
                   UserName
@@ -243,7 +256,7 @@ class ListOfUsers extends React.Component {
               </div>
 
             </div>
-
+             
           </div>
         </div>
       </div>
