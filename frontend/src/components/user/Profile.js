@@ -6,6 +6,8 @@ import { Link } from "react-router-dom"
 import addTrips from "./listOfTrips/addTrips";
 import Card from "./userBooks/Card";
 import MediaControlCard from "./userBooks/Card";
+import BarButton from "./listOfTrips/BarButton"
+
 class Profile extends React.Component {
 
   constructor(props) {
@@ -170,6 +172,9 @@ class Profile extends React.Component {
           </div>
           <div className="col left" id="column">
             <div className='cards__container' id="cards__container1">
+            <div>
+              <BarButton />
+            </div>
               <div className="cards__wrapper">
                 <br></br>
                 <br></br>

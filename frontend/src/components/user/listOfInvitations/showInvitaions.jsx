@@ -4,7 +4,8 @@ import Carditem from '../userBooks/Card';
 import $ from 'jquery'
 import { Link } from "react-router-dom"
 import MediaControlCard from "../userBooks/Card";
-import BarButton from "../listOfTrips/BarButton";
+import BarButton from "../listOfTrips/BarButton"
+
 class Invitations extends React.Component {
 
   constructor(props) {
@@ -169,13 +170,13 @@ class Invitations extends React.Component {
             </div>
           </div>
           <div className="col left" id="column">
-          <div>
-              <BarButton />
-              </div>
+
             <div className='cards__container' id="cards__container1" style={{overflowY:"scroll" , height :"45vw"}}>
-            
+            <div>
+              <BarButton />
+            </div>
               <div className="cards__wrapper" style={{paddingTop:"0px"}}>
-             
+
                 <br></br>
                 <br></br>
               
