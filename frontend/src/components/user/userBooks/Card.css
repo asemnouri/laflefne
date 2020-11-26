@@ -15,15 +15,28 @@
     margin: 3rem;
     /* margin-bottom: 15px; */
     box-shadow: black;
-    width: 35vw;
+    width: 45vw;
   
 }
 
+#body1 {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ffffff60;
+    margin: 3rem;
+    /* margin-bottom: 15px; */
+    box-shadow: black;
+    width: 35vw;
+  
+}
 .first_img {
     flex: .50;
-    background: url(https://www.almrsal.com/wp-content/uploads/2018/12/%D9%88%D8%A7%D8%AF%D9%8A-%D8%A7%D9%84%D9%82%D9%84%D8%B7.jpg);
+    /* background: url(https://www.almrsal.com/wp-content/uploads/2018/12/%D9%88%D8%A7%D8%AF%D9%8A-%D8%A7%D9%84%D9%82%D9%84%D8%B7.jpg); */
     background-repeat: no-repeat;
-    background-size: 250px 200px;
+    background-size: 250px 240px;
+    margin: 10px;
+    border-radius:25px;
+    border-radius:25px;
     
 }
 
