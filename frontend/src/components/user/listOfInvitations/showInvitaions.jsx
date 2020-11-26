@@ -142,7 +142,7 @@ class Invitations extends React.Component {
                         add a new trip
                       </button>
                     </Link>
-                    <Link to="/invitations">
+                    <Link to="/user/invitations">
                       <button>
                         Invitations
                       </button>

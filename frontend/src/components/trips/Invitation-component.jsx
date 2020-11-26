@@ -38,6 +38,7 @@ class Invite extends React.Component {
         this.setState({
             email: ''
         })
+        this.props.invite()
 
     }
     render() {
