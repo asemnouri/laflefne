@@ -75,29 +75,11 @@ class Trip extends React.Component {
             .catch((error) => {
                 console.error('Error:', error);
             });
-    } 
-    setinvitation=()=>{
-        this.setState({invite:false})
     }
-
-    // getInvitationBox = () => {
-    //     return <Invite sender={this.state.userid.name} />
-    // }
+    setinvitation = () => {
+        this.setState({ invite: false })
+    }
     render() {
-        // var today = new Date();
-        // let statedata = {}
-        // let pathname = '/trip'
-        // if (this.props.location.state.userid && this.props.location.state.trip) {
-        //     var ex = new Date(this.props.location.state.trip.deadLine)
-        //     if (!this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid) && (this.state.maxnoPerTrip !== this.state.whobookit) && (ex.getTime() >= today.getTime())) {
-        //         pathname = '/payment'
-        //         statedata = {
-        //             tripid: this.props.location.state.trip._id,
-        //             userid: this.props.location.state.userid
-        //         }
-        //     }
-        // }
-
         return (
             <div >
                 {/* display the icons on the trip comp */}
@@ -127,22 +109,46 @@ class Trip extends React.Component {
                         <img className='imgs' src='https://www.flaticon.com/svg/static/icons/svg/3409/3409565.svg' alt='tripGuide'></img>
                         <p>{this.state.thetrip.tripGuide}</p>
                     </div>
+                    {localStorage.getItem("user-id") ?
+                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
+                            <div>
+                                <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
+                                <p>Start Chat</p>
+                            </div>
+                            :
+                            <></>
+                        : <></>
+                    }
+                    {localStorage.getItem("user-id") ?
+                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
+                            <div>
+                                <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} ><img className='imgs' src='https://img.icons8.com/fluent/2x/add-user-group-man-man.png' alt='invite'></img></Button>
+                                <p>Invite friend</p>
+                            </div>
+                            :
+                            <></>
+                        : <></>
 
-                    <div>
-                        <img className='imgs' src='https://img.icons8.com/cute-clipart/2x/chat.png' alt='chat'></img>
-                        <p>Start Chat</p>
-                    </div>
-                    <div>
-                        <img className='imgs' src='https://img.icons8.com/fluent/2x/add-user-group-man-man.png' alt='invite'></img>
-                        <p>Invite friend</p>
-                    </div>
+                    }
+
+                </div>
+                {this.state.invite === true ?
+                    <Invite userid={localStorage.getItem("user-id")} invite={this.setinvitation} tripId={this.state.tripId} userName={this.state.userName} from_email={this.state.userMail} /> :
+                    <div></div>
+                }
+                <br></br>
+                <div style={{ textAlign: "center" }}>
+                    {localStorage.getItem("user-id") ?
+                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
+
+                            <div />
+                            :
+                            <StripeCheckoutButton componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId} />
+                        : <div></div>
+                    }
                 </div>
                 <br></br>
-                <div>
-                    {/* {console.log(Object.keys(this.state.thetrip.discription))}
-                    {Object.keys(this.state.thetrip.discription).map((value) => {
-                        console.log(value)
-                    })} */}
+                <div style={{ margin: "30px" }}>
                     {Object.keys(this.state.thetrip.discription).map((value) => {
                         let props = {
                             key: value,
@@ -160,26 +166,13 @@ class Trip extends React.Component {
                 {/* user id -- price -- trip id */}
                 {/* put user id in trip */}
                 {/* put trip id in the user */}
-                <div style={{ textAlign: "center" }}>
-                    {
-                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
 
-                            <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
-                            :
-                            <StripeCheckoutButton componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId} />
 
-                    }
-                </div>
-
-                <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} >Invite</Button>
                 {console.log('tripp id: ', this.state.tripId)}
                 {console.log('from email: ', this.state.userMail)}
                 {console.log('from user name: ', this.state.userName)}
 
-                {this.state.invite === true ?
-                    <Invite userid={localStorage.getItem("user-id")} invite={this.setinvitation} tripId={this.state.tripId} userName={this.state.userName} from_email={this.state.userMail} /> :
-                    <div></div>
-                }
+
 
             </div>
         )

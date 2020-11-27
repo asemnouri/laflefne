@@ -4,7 +4,8 @@ import Carditem from '../userBooks/Card';
 import $ from 'jquery'
 import { Link } from "react-router-dom"
 import MediaControlCard from "../userBooks/Card";
-import BarButton from "../listOfTrips/BarButton"
+
+// import BarButton from "../listOfTrips/BarButton"
 
 class Invitations extends React.Component {
 
@@ -91,94 +92,81 @@ class Invitations extends React.Component {
                             trip={trip}
                         />)}</ul>
             </div>
-
-        }
-        else {
-            cards = <div>No Booked Trips Yet</div>
-        }
-        return (
-            <div className="imgdiv">
-                <div className="row" id="row">
-                    <div id="profile" className="col-sm-4 right" >
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <div className='picContainer'>
-                            <img className="img1"
-                                src={this.state.profileimg}
-                                alt="userPic"
-                            />
-                        </div>
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <div className='textContainer' >
-                            <div>
-                                <h4 className="text">Name</h4>
-                                <h6 className="text1">{this.props.userid.userName}</h6>
-                            </div>
-                            <div>
-                                <h4 className="text">Email</h4>
-                                <h6 className="text1">{this.props.userid.userMail}</h6>
-                            </div>
-                            <div>
-                                <h4 className="text">Phone Number</h4>
-                                <h6 className="text1">{this.props.userid.userNum}</h6>
-                            </div>
-                            <div>
-
-                                {this.props.userid.admin ?
-                                    <div>
-                                        <Link to="/user">
-                                            <button>
-                                                user books
+            <br></br>
+            <div className='textContainer' >
+              <div>
+                <h4 className="text">Name</h4>
+                <h6 className="text1">{this.props.userid.userName}</h6>
+              </div>
+              <div>
+                <h4 className="text">Email</h4>
+                <h6 className="text1">{this.props.userid.userMail}</h6>
+              </div>
+              <div>
+                <h4 className="text">Phone Number</h4>
+                <h6 className="text1">{this.props.userid.userNum}</h6>
+              </div>
+              <div>
+              <br></br>
+                {this.props.userid.admin ?
+                  <div>
+                    <Link to="/user">
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
+                        user books
                       </button>
-                                        </Link>
-                                        <Link to="/user/users">
-                                            <button>
-                                                users
+                    </Link>
+                    <Link to="/user/users">
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
+                        users
                         </button>
-                                        </Link>
-                                        <Link to="/user/addtrip">
-                                            <button>
-                                                add a new trip
+                    </Link>
+                    <Link to="/user/addtrip">
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
+                        add a new trip
                       </button>
-                                        </Link>
-                                        <Link to="/user/invitations">
-                                            <button>
-                                                Invitations
+                    </Link>
+                    <Link to="/user/invitations">
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
+                        Invitations
                       </button>
-                                        </Link>
-                                    </div>
+                    </Link>
+                  </div>
 
-                                    :
-                                    <div>
-                                        <Link to="/user">
-                                            <button>
-                                                user books
+                  :
+                  <div>
+                    <Link to="/user">
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
+                        user books
                       </button>
-                                        </Link>
-                                        <Link to="/user/invitations">
-                                            <button>
-                                                Invitations
+                    </Link>
+                    <Link to="/user/invitations">
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
+                        Invitations
                   </button>
-                                        </Link>
-                                    </div>
-                                }
+                    </Link>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+          <div className="col left" id="column">
+            <div className='cards__container' id="cards__container1" style={{overflowY:"scroll" , height :"45vw"}}>
+            {/* <div>
+              <BarButton />
+            </div> */}
+              <div className="cards__wrapper" style={{paddingTop:"0px"}}>
+                <br></br>
+                <br></br>
+              
 
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col left" id="column">
-
-                        <div className='cards__container' id="cards__container1" style={{ overflowY: "scroll", height: "45vw" }}>
-                            <div>
-                                <BarButton />
-                            </div>
-                            <div className="cards__wrapper" style={{ paddingTop: "0px" }}>
-
-                                <br></br>
-                                <br></br>
+                <div>
+                {
+                  this.state.tripArray.map((trip,i)=>{
+                    return <MediaControlCard trip={trip.tripId} from_email={trip.from_email} senderName={trip.senderName} key={i} />
+                  })
+                  
+                }
+                </div>
 
 
 

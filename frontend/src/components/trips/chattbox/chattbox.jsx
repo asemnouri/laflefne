@@ -73,7 +73,8 @@ export default function ScrollDialog({ chatBoxData, componentDidM, name }) {
 
     return (
         <div>
-            <Button variant='contained' size="large" onClick={handleClickOpen("paper")}>Click to chat</Button>
+                  
+            <Button  size="large" onClick={handleClickOpen("paper")}>  <img className='imgs' src='https://img.icons8.com/cute-clipart/2x/chat.png' alt='chat'></img></Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
