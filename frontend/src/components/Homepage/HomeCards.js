@@ -1,7 +1,7 @@
 import React from 'react';
 import Carditem from './Carditem';
 import './A-Style.css'
-
+import "./card.css"
 class Cards extends React.Component {
     constructor(props) {
         super(props)
@@ -19,8 +19,7 @@ class Cards extends React.Component {
             <div className='cards'>
                 <h1>New Featured Trips</h1>
                 <div className='cards__container'>
-                    <div className="cards__wrapper">
-                        <ul className="cards__items">
+                        <ul className="cards-list">
                         {/* Display the three newest featured trip in the homepage */}
                             {this.props.testtrips.slice(0, 3).map((trip) =>
                                 <Carditem
@@ -32,7 +31,6 @@ class Cards extends React.Component {
                                     userid={this.props.userid}
                                 />)}
                         </ul>
-                    </div>
                 </div>
             </div>
         )

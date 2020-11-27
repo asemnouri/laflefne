@@ -170,7 +170,7 @@ class Profile extends React.Component {
             </div>
           </div>
           <div className="col left" id="column">
-            <div className='cards__container' id="cards__container1">
+            <div className='cards__container' id="cards__container1" style={{overflowY:"scroll" , height :"45vw"}}>
             {/* <div>
               <BarButton />
             </div> */}

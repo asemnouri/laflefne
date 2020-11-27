@@ -79,25 +79,7 @@ class Trip extends React.Component {
     setinvitation = () => {
         this.setState({ invite: false })
     }
-
-    // getInvitationBox = () => {
-    //     return <Invite sender={this.state.userid.name} />
-    // }
     render() {
-        // var today = new Date();
-        // let statedata = {}
-        // let pathname = '/trip'
-        // if (this.props.location.state.userid && this.props.location.state.trip) {
-        //     var ex = new Date(this.props.location.state.trip.deadLine)
-        //     if (!this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid) && (this.state.maxnoPerTrip !== this.state.whobookit) && (ex.getTime() >= today.getTime())) {
-        //         pathname = '/payment'
-        //         statedata = {
-        //             tripid: this.props.location.state.trip._id,
-        //             userid: this.props.location.state.userid
-        //         }
-        //     }
-        // }
-
         return (
             <div >
                 {/* display the icons on the trip comp */}
@@ -127,15 +109,29 @@ class Trip extends React.Component {
                         <img className='imgs' src='https://www.flaticon.com/svg/static/icons/svg/3409/3409565.svg' alt='tripGuide'></img>
                         <p>{this.state.thetrip.tripGuide}</p>
                     </div>
-                    <div>
-                        <img className='imgs' src='https://img.icons8.com/cute-clipart/2x/chat.png' alt='chat'></img>
-                        <p>Start Chat</p>
-                    </div>
-                    <div>
+                    {localStorage.getItem("user-id") ?
+                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
+                            <div>
+                                <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
+                                <p>Start Chat</p>
+                            </div>
+                            :
+                            <></>
+                        : <></>
+                    }
+                    {localStorage.getItem("user-id") ?
+                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
+                            <div>
+                                <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} ><img className='imgs' src='https://img.icons8.com/fluent/2x/add-user-group-man-man.png' alt='invite'></img></Button>
+                                <p>Invite friend</p>
+                            </div>
+                            :
+                            <></>
+                        : <></>
 
-                        <Button onClick={() => this.setState({ invite: true })} componentDidM={this.componentDidMount} ><img className='imgs' src='https://img.icons8.com/fluent/2x/add-user-group-man-man.png' alt='invite'></img></Button>
-                        <p>Invite friend</p>
-                    </div>
+                    }
+
+
 
                 </div>
                 {this.state.invite === true ?
@@ -143,7 +139,18 @@ class Trip extends React.Component {
                     <div></div>
                 }
                 <br></br>
-                <div>
+                <div style={{ textAlign: "center" }}>
+                    {localStorage.getItem("user-id") ?
+                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
+
+                            <div />
+                            :
+                            <StripeCheckoutButton componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId} />
+                        : <div></div>
+                    }
+                </div>
+                <br></br>
+                <div style={{ margin: "30px" }}>
                     {Object.keys(this.state.thetrip.discription).map((value) => {
                         let props = {
                             key: value,
@@ -161,17 +168,6 @@ class Trip extends React.Component {
                 {/* user id -- price -- trip id */}
                 {/* put user id in trip */}
                 {/* put trip id in the user */}
-                <div style={{ textAlign: "center" }}>
-                    {localStorage.getItem("user-id") ?
-                        this.state.admin || this.state.idOfTourist.includes(localStorage.getItem("user-id")) ?
-
-                            <ScrollDialog chatBoxData={this.state.chatBoxData} name={this.state.thetrip.name} componentDidM={this.componentDidMount} />
-                            :
-                            <StripeCheckoutButton componentDidM={this.componentDidMount} price={this.state.priceForStripe} userid={localStorage.getItem("user-id")} tripId={this.state.tripId} />
-                        : <div></div>
-
-                    }
-                </div>
 
 
                 {console.log('tripp id: ', this.state.tripId)}
