@@ -4,6 +4,7 @@ import Carditem from '../userBooks/Card';
 import $ from 'jquery'
 import { Link } from "react-router-dom"
 import MediaControlCard from "../userBooks/Card";
+// import BarButton from "../listOfTrips/BarButton"
 class Invitations extends React.Component {
 
   constructor(props) {
@@ -108,8 +109,6 @@ class Invitations extends React.Component {
               />
             </div>
             <br></br>
-            <br></br>
-            <br></br>
             <div className='textContainer' >
               <div>
                 <h4 className="text">Name</h4>
@@ -124,26 +123,26 @@ class Invitations extends React.Component {
                 <h6 className="text1">{this.props.userid.userNum}</h6>
               </div>
               <div>
-
+              <br></br>
                 {this.props.userid.admin ?
                   <div>
                     <Link to="/user">
-                      <button>
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         user books
                       </button>
                     </Link>
                     <Link to="/user/users">
-                      <button>
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         users
                         </button>
                     </Link>
                     <Link to="/user/addtrip">
-                      <button>
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         add a new trip
                       </button>
                     </Link>
-                    <Link to="/invitations">
-                      <button>
+                    <Link to="/user/invitations">
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         Invitations
                       </button>
                     </Link>
@@ -152,12 +151,12 @@ class Invitations extends React.Component {
                   :
                   <div>
                     <Link to="/user">
-                      <button>
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         user books
                       </button>
                     </Link>
                     <Link to="/user/invitations">
-                      <button>
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         Invitations
                   </button>
                     </Link>
@@ -167,8 +166,11 @@ class Invitations extends React.Component {
             </div>
           </div>
           <div className="col left" id="column">
-            <div className='cards__container' id="cards__container1">
-              <div className="cards__wrapper">
+            <div className='cards__container' id="cards__container1" style={{overflowY:"scroll" , height :"45vw"}}>
+            {/* <div>
+              <BarButton />
+            </div> */}
+              <div className="cards__wrapper" style={{paddingTop:"0px"}}>
                 <br></br>
                 <br></br>
               

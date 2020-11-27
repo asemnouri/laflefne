@@ -5,6 +5,7 @@ import $ from 'jquery'
 import { Link } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+// import BarButton from "../listOfTrips/BarButton"
 class ListOfUsers extends React.Component {
   constructor(props) {
     super(props)
@@ -119,9 +120,9 @@ class ListOfUsers extends React.Component {
   render() {
     console.log('aa', this.state.arrayofuser)
     return (
-      <div className="imgdiv">
-        <div className="row" id="row">
-          <div id="profile" className="col-sm-4 right" >
+      <div className="imgdiv" >
+        <div className="row" id="row" >
+          <div id="profile" className="col-sm-4 right"  >
             <br></br>
             <br></br>
             <br></br>
@@ -131,8 +132,6 @@ class ListOfUsers extends React.Component {
                 alt="userPic"
               />
             </div>
-            <br></br>
-            <br></br>
             <br></br>
             <div className='textContainer' >
               <div>
@@ -147,38 +146,42 @@ class ListOfUsers extends React.Component {
                 <h4 className="text">Phone Number</h4>
                 <h6 className="text1">{this.props.userid.userNum}</h6>
               </div>
-              <div>
+              <div >
+              <br></br>
                 <Link to="/user">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     user books
                  </button>
                 </Link>
                 <Link to="/user/users">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     users
                  </button>
                 </Link>
                 <Link to="/user/addtrip">
-                  <button>
+                  <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                     add a new trip
                   </button>
                 </Link>
                 <Link to="/user/invitations">
-                      <button>
+                      <button style={{backgroundColor:" #555555", border:"2px solid black", margin:"7px", paddingLeft:"3px",padding:"3px",borderRadius:"15px"}}>
                         Invitations
                   </button>
                     </Link>
               </div>
             </div>
           </div>
-          <div className="col left" id="column">
-            <div style={{ display: "flex", marginTop: "5rem", justifyContent: "center", height: "50vh", }}>
+          <div className="col left" id="column" >
+            {/* <div>
+              <BarButton />
+            </div> */}
+            <div style={{ display: "flex", marginTop: "5rem", justifyContent: "center", height: "62vh",overflowY:"scroll"}}>
               <div style={{ backgroundColor: "#ffffff70", flex: ".20", textAlign: "center" }}>
                 <div style={{ borderBottom: ".5px solid", marginTop: "2px" }}>
                   UserName
                      </div>
                 {this.state.arrayofuser.map((user) => {
-                  return <div style={{ marginTop: "1rem" }}><p>{user.userName} </p>
+                  return <div style={{ marginTop: "1.2rem" }}><p>{user.userName} </p>
                   </div>
                 })}
               </div>
@@ -187,7 +190,7 @@ class ListOfUsers extends React.Component {
                   Email
               </div>
                 {this.state.arrayofuser.map((user) => {
-                  return <div style={{ marginTop: "1rem" }}><p>{user.userMail}</p></div>
+                  return <div style={{ marginTop: "1.2rem" }}><p>{user.userMail}</p></div>
 
                 })}
               </div>

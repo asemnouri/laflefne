@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -67,11 +67,14 @@ export default function ScrollDialog({ chatBoxData, componentDidM, name }) {
                 descriptionElement.focus();
             }
         }
+        console.log("hello")
+        componentDidM()
     }, [open]);
 
     return (
         <div>
-            <Button variant='contained' size="large" onClick={handleClickOpen("paper")}>Click to chat</Button>
+                  
+            <Button  size="large" onClick={handleClickOpen("paper")}>  <img className='imgs' src='https://img.icons8.com/cute-clipart/2x/chat.png' alt='chat'></img></Button>
             <Dialog
                 open={open}
                 onClose={handleClose}

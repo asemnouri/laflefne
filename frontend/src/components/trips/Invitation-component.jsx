@@ -38,11 +38,12 @@ class Invite extends React.Component {
         this.setState({
             email: ''
         })
+        this.props.invite()
 
     }
     render() {
         return (
-            <div>
+            <div style={{display:"flex",justifyContent:"center"}}>
                 <TextField
                     id="date"
                     label="Friend email"
@@ -57,7 +58,7 @@ class Invite extends React.Component {
                     }}
                 />
                 <Button
-                    style={{ marginTop: '10px' }}
+                    style={{ marginTop: '10px',marginLeft:"30px" }}
                     className="textField pad"
                     variant="outlined"
                     color="primary"
