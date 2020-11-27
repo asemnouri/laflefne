@@ -1,11 +1,10 @@
 const express = require('express');
 const app = express();
 const routers = require('./routes');
-// const {trips}=require("./DataModel")
+
 var cookieParser = require('cookie-parser')
-const auth = require('./auth')
 const path = require('path');
-// const cors=require("cors")
+
 const bodyParser = require('body-parser');
 
 
@@ -27,7 +26,11 @@ console.log("*************111111111*************")
 //   res.send("okkkk") 
 // })
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname + '/frontend/build'))
+  app.use(express.static('frontend/build'))
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"))
+  })
 }
 //  app.post("/data",async (req,res)=>{
 //    let result=req.body.data
