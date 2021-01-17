@@ -29,6 +29,9 @@ body{
     margin-left: 12px;
 }
 
+.imgs {
+    width: 40px;
+}
 .btn-dark{
     background-color:rgb(97, 24, 56) !important ;
     width: 16vw;

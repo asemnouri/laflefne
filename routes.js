@@ -42,3 +42,9 @@ routers.post('/addchatRoom', chatRoomController.postMsg)
 
 
 module.exports = routers;
+/*
+
+https://i.pinimg.com/originals/0f/d3/bd/0fd3bdb3cb277b513c800b80a7f68457.jpg--https://i.ytimg.com/vi/dVydxnsVVxQ/maxresdefault.jpg||https://www.quotemaster.org/images/0c/0c36ffdd0d11f03d369cf895d7d31f78.jpg--https://en.bcdn.biz/Images/2017/2/3/cd84756d-25b6-443b-8c29-3bb3fe83ab37.jpg||https://www.inkayniperutours.com/blog/wp-content/uploads/2020/04/iguaz%C3%BA-inkayni-peru-tours.jpg--https://3erc1e4bvanrdzas82cngnw1-wpengine.netdna-ssl.com/wp-content/uploads/2020/04/01-optical-illusion-GettyImages-1154509375-e1586800877813-770.jpg
+
+
+*/
